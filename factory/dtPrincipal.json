@@ -1,0 +1,9 @@
+{
+	"name": "dtPrincipal",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a6ae8bb9-c307-47c4-afd9-f5f7732954c6",
+		"tenantId": "c1079c2c-7cf3-462b-b81d-1303c880b67d"
+	}
+}
