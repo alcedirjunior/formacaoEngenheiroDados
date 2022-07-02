@@ -1,0 +1,23 @@
+{
+	"name": "DS_Movies",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServerMovie",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "FormacaoED"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
