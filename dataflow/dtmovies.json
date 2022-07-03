@@ -16,19 +16,41 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "SelectContNome"
+				},
+				{
+					"name": "MoviesAcima1950"
+				},
+				{
+					"name": "DerivadaGenre"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
-				"          Column_1 as string,",
-				"          Column_2 as string,",
-				"          Column_3 as string,",
-				"          Column_4 as string,",
-				"          Column_5 as string,",
-				"          Column_6 as string",
+				"          movie as string,",
+				"          title as string,",
+				"          genres as string,",
+				"          year as string,",
+				"          Rating as string,",
+				"          {Rotton Tomato} as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> MoviesDL"
+				"     ignoreNoFilesFound: false) ~> MoviesDL",
+				"MoviesDL select(mapColumn(",
+				"          movie,",
+				"          title,",
+				"          genres,",
+				"          year,",
+				"          Rating,",
+				"          {Rotten Tomato} = {Rotton Tomato}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectContNome",
+				"SelectContNome filter(toInteger(year) > 1950) ~> MoviesAcima1950",
+				"MoviesAcima1950 derive(PrimaryGenre = iif(locate('|', genres) > 1, left(genres, locate(('|'), genres) -1), genres)) ~> DerivadaGenre"
 			]
 		}
 	}
