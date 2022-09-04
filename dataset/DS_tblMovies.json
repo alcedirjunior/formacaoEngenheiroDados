@@ -5,6 +5,9 @@
 			"referenceName": "SqlServerMovies",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "FormacaoED"
+		},
 		"annotations": [],
 		"type": "SqlServerTable",
 		"schema": [
