@@ -28,6 +28,9 @@
 				},
 				{
 					"name": "JanelaRankMovies"
+				},
+				{
+					"name": "AgragacaoRating"
 				}
 			],
 			"scriptLines": [
@@ -60,7 +63,9 @@
 				"ColunaDerivada window(over(PrimeiroGenero,",
 				"          year),",
 				"     asc(title, true),",
-				"     Rank = rank()) ~> JanelaRankMovies"
+				"     Rank = rank()) ~> JanelaRankMovies",
+				"JanelaRankMovies aggregate(groupBy(PrimeiroGenero,",
+				"          year)) ~> AgragacaoRating"
 			]
 		}
 	}
