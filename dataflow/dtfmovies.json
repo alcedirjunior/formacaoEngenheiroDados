@@ -86,7 +86,8 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> ColetorFilmes"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> ColetorFilmes"
 			]
 		}
 	}
