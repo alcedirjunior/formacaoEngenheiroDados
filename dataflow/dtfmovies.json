@@ -80,7 +80,7 @@
 				"          NumeroFilmes = count()) ~> AgregacaoRating",
 				"AgregacaoRating sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:[''],",
+				"     partitionFileNames:['MovieFinal.csv'],",
 				"     truncate: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",
