@@ -17,6 +17,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "DatasetDatalakeDestinoFinal",
+						"type": "DatasetReference"
+					},
 					"name": "ColetorFilmes"
 				}
 			],
@@ -76,6 +80,9 @@
 				"          NumeroFilmes = count()) ~> AgregacaoRating",
 				"AgregacaoRating sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> ColetorFilmes"
 			]
