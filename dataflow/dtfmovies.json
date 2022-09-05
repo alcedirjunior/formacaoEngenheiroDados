@@ -30,7 +30,7 @@
 					"name": "JanelaRankMovies"
 				},
 				{
-					"name": "AgragacaoRating"
+					"name": "AgregacaoRating"
 				}
 			],
 			"scriptLines": [
@@ -65,7 +65,11 @@
 				"     asc(title, true),",
 				"     Rank = rank()) ~> JanelaRankMovies",
 				"JanelaRankMovies aggregate(groupBy(PrimeiroGenero,",
-				"          year)) ~> AgragacaoRating"
+				"          year),",
+				"     MediaAvaliacao = avg(toInteger({Rotten Tomato})),",
+				"          PrimeiroAvaliado = first(title),",
+				"          UltimoAvaliado = last(title),",
+				"          NumeroFilmes = count()) ~> AgregacaoRating"
 			]
 		}
 	}
