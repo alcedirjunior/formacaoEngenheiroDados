@@ -21,7 +21,7 @@
 					"name": "FilmesAcima1950"
 				},
 				{
-					"name": "DerivadaGenre"
+					"name": "ColunaDerivada"
 				},
 				{
 					"name": "SelectCorrigeNomeColuna"
@@ -43,7 +43,7 @@
 				"Converter o ano de string para inteiro e selecionar apenas os maiores que 1950\r",
 				"**************************************/\r",
 				"toInteger(year) > 1950) ~> FilmesAcima1950",
-				"FilmesAcima1950 derive(PrimaryGenre = iif(locate('|', genres) > 1, left(genres, locate(('|'), genres) -1), genres)) ~> DerivadaGenre",
+				"FilmesAcima1950 derive(PrimeiroGenero = iif(locate('|', genres) > 1, left(genres, locate(('|'), genres) -1), genres)) ~> ColunaDerivada",
 				"MoviesDL select(mapColumn(",
 				"          movie,",
 				"          title,",
