@@ -25,6 +25,9 @@
 				},
 				{
 					"name": "SelectCorrigeNomeColuna"
+				},
+				{
+					"name": "JanelaRankMovies"
 				}
 			],
 			"scriptLines": [
@@ -53,7 +56,11 @@
 				"          {Rotten Tomato} = {Rotton Tomato}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> SelectCorrigeNomeColuna"
+				"     skipDuplicateMapOutputs: true) ~> SelectCorrigeNomeColuna",
+				"ColunaDerivada window(over(PrimeiroGenero,",
+				"          year),",
+				"     asc(title, true),",
+				"     Rank = rank()) ~> JanelaRankMovies"
 			]
 		}
 	}
