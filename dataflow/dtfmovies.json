@@ -15,7 +15,11 @@
 					"name": "MoviesDL"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "ColetorFilmes"
+				}
+			],
 			"transformations": [
 				{
 					"name": "FilmesAcima1950"
@@ -69,7 +73,11 @@
 				"     MediaAvaliacao = avg(toInteger({Rotten Tomato})),",
 				"          PrimeiroAvaliado = first(title),",
 				"          UltimoAvaliado = last(title),",
-				"          NumeroFilmes = count()) ~> AgregacaoRating"
+				"          NumeroFilmes = count()) ~> AgregacaoRating",
+				"AgregacaoRating sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> ColetorFilmes"
 			]
 		}
 	}
