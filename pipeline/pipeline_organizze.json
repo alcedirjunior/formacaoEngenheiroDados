@@ -56,6 +56,15 @@
 									"type": "String",
 									"ordinal": 2
 								}
+							},
+							{
+								"source": {
+									"path": "$['parent_id']"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 3
+								}
 							}
 						],
 						"collectionReference": "",
