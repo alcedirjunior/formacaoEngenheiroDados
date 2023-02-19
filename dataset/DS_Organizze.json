@@ -1,0 +1,15 @@
+{
+	"name": "DS_Organizze",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestServiceOrganizze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
