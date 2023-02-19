@@ -65,15 +65,6 @@
 									"type": "String",
 									"ordinal": 3
 								}
-							},
-							{
-								"source": {
-									"path": "$['parent_id']"
-								},
-								"sink": {
-									"type": "Int64",
-									"ordinal": 4
-								}
 							}
 						]
 					}
