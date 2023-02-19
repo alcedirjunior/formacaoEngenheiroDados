@@ -44,6 +44,7 @@
 									"path": "$['id']"
 								},
 								"sink": {
+									"type": "Int64",
 									"ordinal": 1
 								}
 							},
@@ -52,6 +53,7 @@
 									"path": "$['name']"
 								},
 								"sink": {
+									"type": "String",
 									"ordinal": 2
 								}
 							},
@@ -60,6 +62,7 @@
 									"path": "$['color']"
 								},
 								"sink": {
+									"type": "String",
 									"ordinal": 3
 								}
 							},
@@ -68,6 +71,7 @@
 									"path": "$['parent_id']"
 								},
 								"sink": {
+									"type": "Int64",
 									"ordinal": 4
 								}
 							}
