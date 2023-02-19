@@ -44,7 +44,7 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"type": "String",
+									"type": "Int64",
 									"ordinal": 1
 								}
 							},
@@ -59,16 +59,25 @@
 							},
 							{
 								"source": {
-									"path": "$['parent_id']"
+									"path": "$['color']"
 								},
 								"sink": {
 									"type": "String",
 									"ordinal": 3
 								}
+							},
+							{
+								"source": {
+									"path": "$['parent_id']"
+								},
+								"sink": {
+									"type": "String",
+									"ordinal": 4
+								}
 							}
 						],
 						"collectionReference": "",
-						"mapComplexValuesToString": true
+						"mapComplexValuesToString": false
 					}
 				},
 				"inputs": [
