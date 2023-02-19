@@ -44,7 +44,7 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"type": "Int64",
+									"type": "String",
 									"ordinal": 1
 								}
 							},
