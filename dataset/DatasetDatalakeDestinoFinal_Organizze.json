@@ -1,0 +1,26 @@
+{
+	"name": "DatasetDatalakeDestinoFinal_Organizze",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageArquivoFinal",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "FormacaoED"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Organizze.csv",
+				"folderPath": "DestinMovies",
+				"fileSystem": "disco1"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
