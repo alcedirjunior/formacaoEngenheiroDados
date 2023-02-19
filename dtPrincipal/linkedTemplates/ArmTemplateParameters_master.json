@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "dtPrincipal"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorageArquivoFinal_accountKey": {
+			"value": ""
+		},
+		"SqlServerMovies_connectionString": {
+			"value": ""
+		},
+		"RestServiceOrganizze_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://saformacaoedaj.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorageArquivoFinal_properties_typeProperties_url": {
+			"value": "https://saformacaoedaj.dfs.core.windows.net/"
+		},
+		"HttpServerMovie_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv"
+		},
+		"RestServiceOrganizze_properties_typeProperties_url": {
+			"value": "https://api.organizze.com.br/rest/v2/categories/"
+		},
+		"RestServiceOrganizze_properties_typeProperties_userName": {
+			"value": "juniorgodoy@outlook.com.br"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

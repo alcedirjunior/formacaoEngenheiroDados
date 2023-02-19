@@ -1,0 +1,105 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nome do Data Factory",
+			"defaultValue": "dtPrincipal"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorage'"
+		},
+		"AzureDataLakeStorageArquivoFinal_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorageArquivoFinal'"
+		},
+		"SqlServerMovies_connectionString": {
+			"type": "secureString",
+			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerMovies'"
+		},
+		"RestServiceOrganizze_password": {
+			"type": "secureString",
+			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saformacaoedaj.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorageArquivoFinal_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://saformacaoedaj.dfs.core.windows.net/"
+		},
+		"HttpServerMovie_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv"
+		},
+		"RestServiceOrganizze_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.organizze.com.br/rest/v2/categories/"
+		},
+		"RestServiceOrganizze_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "juniorgodoy@outlook.com.br"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI para a conta de armazenamento contendo os modelos do ARM vinculados"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Token SAS para a conta de armazenamento contendo modelos do ARM vinculados"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "dtPrincipal_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage_accountKey')]"
+					},
+					"AzureDataLakeStorageArquivoFinal_accountKey": {
+						"value": "[parameters('AzureDataLakeStorageArquivoFinal_accountKey')]"
+					},
+					"SqlServerMovies_connectionString": {
+						"value": "[parameters('SqlServerMovies_connectionString')]"
+					},
+					"RestServiceOrganizze_password": {
+						"value": "[parameters('RestServiceOrganizze_password')]"
+					},
+					"AzureDataLakeStorage_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorageArquivoFinal_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorageArquivoFinal_properties_typeProperties_url')]"
+					},
+					"HttpServerMovie_properties_typeProperties_url": {
+						"value": "[parameters('HttpServerMovie_properties_typeProperties_url')]"
+					},
+					"RestServiceOrganizze_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceOrganizze_properties_typeProperties_url')]"
+					},
+					"RestServiceOrganizze_properties_typeProperties_userName": {
+						"value": "[parameters('RestServiceOrganizze_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
