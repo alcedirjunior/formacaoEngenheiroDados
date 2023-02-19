@@ -17,7 +17,7 @@
 				"folderPath": "DestinMovies",
 				"fileSystem": "disco1"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": false,
 			"quoteChar": "\""
