@@ -56,18 +56,10 @@
 									"type": "String",
 									"ordinal": 2
 								}
-							},
-							{
-								"source": {
-									"path": "$['color']"
-								},
-								"sink": {
-									"type": "String",
-									"ordinal": 3
-								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
