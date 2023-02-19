@@ -44,7 +44,7 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"type": "Int64",
+									"type": "String",
 									"ordinal": 1
 								}
 							},
@@ -66,7 +66,8 @@
 									"ordinal": 3
 								}
 							}
-						]
+						],
+						"collectionReference": ""
 					}
 				},
 				"inputs": [
