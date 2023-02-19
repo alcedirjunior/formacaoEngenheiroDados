@@ -17,18 +17,13 @@
 				"folderPath": "DestinMovies",
 				"fileSystem": "disco1"
 			},
-			"columnDelimiter": ";",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "13018211",
-				"type": "String"
-			},
-			{
-				"name": "Dívidas",
 				"type": "String"
 			}
 		]
