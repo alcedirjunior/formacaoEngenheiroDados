@@ -320,7 +320,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "FormacaoED"
+					"name": "Organizze"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -334,6 +334,78 @@
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageArquivoFinal",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Organizze.csv",
+						"folderPath": "DestinMovies",
+						"fileSystem": "disco1"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Avro1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageArquivoFinal",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "Avro",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "DestinMovies",
+						"fileSystem": "disco1"
+					}
 				},
 				"schema": []
 			},
@@ -565,14 +637,12 @@
 								}
 							},
 							"sink": {
-								"type": "DelimitedTextSink",
+								"type": "AvroSink",
 								"storeSettings": {
 									"type": "AzureBlobFSWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
+									"type": "AvroWriteSettings"
 								}
 							},
 							"enableStaging": false,
@@ -584,7 +654,8 @@
 											"path": "$['id']"
 										},
 										"sink": {
-											"ordinal": 1
+											"name": "id",
+											"type": "Int64"
 										}
 									},
 									{
@@ -592,7 +663,8 @@
 											"path": "$['name']"
 										},
 										"sink": {
-											"ordinal": 2
+											"name": "name",
+											"type": "String"
 										}
 									},
 									{
@@ -600,7 +672,8 @@
 											"path": "$['color']"
 										},
 										"sink": {
-											"ordinal": 3
+											"name": "color",
+											"type": "String"
 										}
 									},
 									{
@@ -608,10 +681,13 @@
 											"path": "$['parent_id']"
 										},
 										"sink": {
-											"ordinal": 4
+											"name": "parent_id",
+											"type": "String"
 										}
 									}
-								]
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
 							}
 						},
 						"inputs": [
@@ -623,7 +699,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "DatasetDatalakeDestinoFinal_Organizze",
+								"referenceName": "Avro1",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -641,7 +717,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_Organizze')]",
-				"[concat(variables('factoryId'), '/datasets/DatasetDatalakeDestinoFinal_Organizze')]"
+				"[concat(variables('factoryId'), '/datasets/Avro1')]"
 			]
 		},
 		{
