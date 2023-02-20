@@ -26,7 +26,14 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBehavior": "insert",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": false,
+							"keys": [
+								"ID"
+							],
+							"interimSchemaName": ""
+						},
 						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
