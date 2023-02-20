@@ -1,0 +1,38 @@
+{
+	"name": "SqlServerOrganizzeCategoria",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerOrganizze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "COLOR",
+				"type": "varchar"
+			},
+			{
+				"name": "PARENT_ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CATEGORIA_2"
+		}
+	}
+}
