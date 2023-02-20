@@ -25,13 +25,9 @@
 						}
 					},
 					"sink": {
-						"type": "AvroSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "AvroWriteSettings"
-						}
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -86,7 +82,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Avro1",
+						"referenceName": "DS_SqlServerOrganizzeCategoria",
 						"type": "DatasetReference"
 					}
 				]
