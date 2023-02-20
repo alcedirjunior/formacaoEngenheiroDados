@@ -25,14 +25,12 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "AvroSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "AvroWriteSettings"
 						}
 					},
 					"enableStaging": false,
@@ -44,8 +42,8 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"type": "String",
-									"ordinal": 1
+									"name": "id",
+									"type": "Int64"
 								}
 							},
 							{
@@ -53,8 +51,8 @@
 									"path": "$['name']"
 								},
 								"sink": {
-									"type": "String",
-									"ordinal": 2
+									"name": "name",
+									"type": "String"
 								}
 							},
 							{
@@ -62,8 +60,8 @@
 									"path": "$['color']"
 								},
 								"sink": {
-									"type": "String",
-									"ordinal": 3
+									"name": "color",
+									"type": "String"
 								}
 							},
 							{
@@ -71,13 +69,13 @@
 									"path": "$['parent_id']"
 								},
 								"sink": {
-									"type": "String",
-									"ordinal": 4
+									"name": "parent_id",
+									"type": "String"
 								}
 							}
 						],
 						"collectionReference": "",
-						"mapComplexValuesToString": false
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
@@ -88,7 +86,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "Avro1",
 						"type": "DatasetReference"
 					}
 				]
