@@ -1,0 +1,22 @@
+{
+	"name": "Avro1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageArquivoFinal",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": [],
+		"type": "Avro",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "DestinMovies",
+				"fileSystem": "disco1"
+			}
+		},
+		"schema": []
+	}
+}
