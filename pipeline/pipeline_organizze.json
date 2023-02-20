@@ -38,8 +38,7 @@
 									"path": "$['id']"
 								},
 								"sink": {
-									"name": "id",
-									"type": "Int64"
+									"name": "ID"
 								}
 							},
 							{
@@ -47,8 +46,7 @@
 									"path": "$['name']"
 								},
 								"sink": {
-									"name": "name",
-									"type": "String"
+									"name": "NAME"
 								}
 							},
 							{
@@ -56,8 +54,7 @@
 									"path": "$['color']"
 								},
 								"sink": {
-									"name": "color",
-									"type": "String"
+									"name": "COLOR"
 								}
 							},
 							{
@@ -65,8 +62,7 @@
 									"path": "$['parent_id']"
 								},
 								"sink": {
-									"name": "parent_id",
-									"type": "String"
+									"name": "PARENT_ID"
 								}
 							}
 						],
