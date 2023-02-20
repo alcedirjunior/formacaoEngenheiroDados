@@ -13,8 +13,7 @@
 		"schema": [
 			{
 				"name": "ID",
-				"type": "int",
-				"precision": 10
+				"type": "varchar"
 			},
 			{
 				"name": "NAME",
@@ -26,8 +25,7 @@
 			},
 			{
 				"name": "PARENT_ID",
-				"type": "int",
-				"precision": 10
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
