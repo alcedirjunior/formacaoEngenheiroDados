@@ -1,5 +1,5 @@
 {
-	"name": "DS_Organizze_Transacoes2016_2017",
+	"name": "DS_Organizze_Transacoes2018_2019",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceOrganizze",
@@ -11,7 +11,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "transactions?start_date=2016-01-01&end_date=2017-12-31"
+			"relativeUrl": "transactions?start_date=2018-01-01&end_date=2019-12-31"
 		},
 		"schema": []
 	}

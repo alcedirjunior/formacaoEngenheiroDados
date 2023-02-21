@@ -226,7 +226,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_Organizze_Transacoes",
+						"referenceName": "DS_Organizze_Transacoes2016_2017",
 						"type": "DatasetReference"
 					}
 				],
