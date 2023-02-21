@@ -5,7 +5,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://api.organizze.com.br/rest/v2/categories/",
+			"url": "https://api.organizze.com.br/rest/v2/",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Basic",
 			"userName": "juniorgodoy@outlook.com.br",
@@ -15,7 +15,7 @@
 					"value": "**********"
 				}
 			},
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDkzMTA4OEQyLUMyRjgtNDIyNy05NjY2LTNDNEE0MDFDRDNFOF9kYzIwM2VjNy0wMzc4LTRhNGYtOTIxNy01OWUwZDlkZWM4ZjAiDQp9"
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDkzMTA4OEQyLUMyRjgtNDIyNy05NjY2LTNDNEE0MDFDRDNFOF9iNDBhYzQ2NS0xYTIyLTQwYTItOGFmOC00ODM5MmQ3YTY3YjYiDQp9"
 		}
 	}
 }
