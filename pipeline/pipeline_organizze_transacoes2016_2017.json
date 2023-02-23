@@ -26,7 +26,7 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"preCopyScript": "'IF OBJECT_ID(''TRANSACOES'')IS NOT NULL DROP TABLE TRANSACOES'",
+						"preCopyScript": "IF OBJECT_ID('TRANSACOES_2')IS NOT NULL DROP TABLE TRANSACOES_2",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate"
@@ -240,7 +240,7 @@
 					{
 						"activity": "CopyDataOrganizzeTransformacoes2016-2017",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
@@ -482,7 +482,7 @@
 					{
 						"activity": "CopyDataOrganizzeTransformacoes2018-2019",
 						"dependencyConditions": [
-							"Completed"
+							"Succeeded"
 						]
 					}
 				],
