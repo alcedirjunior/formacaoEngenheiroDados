@@ -15,13 +15,17 @@
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorageArquivoFinal'"
 		},
+		"RestServiceOrganizze_password": {
+			"type": "secureString",
+			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+		},
 		"SqlServerMovies_connectionString": {
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerMovies'"
 		},
-		"RestServiceOrganizze_password": {
+		"SqlServerOrganizze_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerOrganizze'"
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -37,7 +41,7 @@
 		},
 		"RestServiceOrganizze_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://api.organizze.com.br/rest/v2/categories/"
+			"defaultValue": "https://api.organizze.com.br/rest/v2/"
 		},
 		"RestServiceOrganizze_properties_typeProperties_userName": {
 			"type": "string",
@@ -98,19 +102,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SqlServerMovies')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('SqlServerMovies_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/RestServiceOrganizze')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -135,6 +126,56 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerMovies')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServerMovies_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Avro1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageArquivoFinal",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "Avro",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "DestinMovies",
+						"fileSystem": "disco1"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_Movies')]",
@@ -162,6 +203,52 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/HttpServerMovie')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "categories/"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2016_2017')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "transactions?start_date=2016-01-01&end_date=2017-12-31"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
 			]
 		},
 		{
@@ -230,84 +317,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dt_transf_movie')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "FormacaoED"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "moviesDB.csv",
-						"folderPath": "Destino",
-						"fileSystem": "disco1"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "movie",
-						"type": "String"
-					},
-					{
-						"name": "title",
-						"type": "String"
-					},
-					{
-						"name": "genres",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "Rating",
-						"type": "String"
-					},
-					{
-						"name": "Rotton Tomato",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_Organizze')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceOrganizze",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Organizze"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
 			]
 		},
 		{
@@ -387,30 +396,125 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Avro1')]",
+			"name": "[concat(parameters('factoryName'), '/dt_transf_movie')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorageArquivoFinal",
+					"referenceName": "AzureDataLakeStorage",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "FormacaoED"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "moviesDB.csv",
+						"folderPath": "Destino",
+						"fileSystem": "disco1"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "movie",
+						"type": "String"
+					},
+					{
+						"name": "title",
+						"type": "String"
+					},
+					{
+						"name": "genres",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "Rating",
+						"type": "String"
+					},
+					{
+						"name": "Rotton Tomato",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerOrganizze')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServerOrganizze_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2018_2019')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
 					"name": "Organizze"
 				},
 				"annotations": [],
-				"type": "Avro",
+				"type": "RestResource",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "DestinMovies",
-						"fileSystem": "disco1"
-					}
+					"relativeUrl": "transactions?start_date=2018-01-01&end_date=2019-12-31"
 				},
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2023')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2023-12-31"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
 			]
 		},
 		{
@@ -512,262 +616,44 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dtfmovies')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
+			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizzeCategoria')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"folder": {
-					"name": "FormacaoED"
+				"linkedServiceName": {
+					"referenceName": "SqlServerOrganizze",
+					"type": "LinkedServiceReference"
 				},
-				"type": "MappingDataFlow",
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "varchar"
+					},
+					{
+						"name": "NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "COLOR",
+						"type": "varchar"
+					},
+					{
+						"name": "PARENT_ID",
+						"type": "varchar"
+					}
+				],
 				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "dt_transf_movie",
-								"type": "DatasetReference"
-							},
-							"name": "MoviesDL"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "DatasetDatalakeDestinoFinal",
-								"type": "DatasetReference"
-							},
-							"name": "ColetorFilmes"
-						}
-					],
-					"transformations": [
-						{
-							"name": "FilmesAcima1950"
-						},
-						{
-							"name": "ColunaDerivada"
-						},
-						{
-							"name": "SelectCorrigeNomeColuna"
-						},
-						{
-							"name": "JanelaRankMovies"
-						},
-						{
-							"name": "AgregacaoRating"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          movie as string,",
-						"          title as string,",
-						"          genres as string,",
-						"          year as string,",
-						"          Rating as string,",
-						"          {Rotton Tomato} as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> MoviesDL",
-						"SelectCorrigeNomeColuna filter(toInteger(year) > 1950) ~> FilmesAcima1950",
-						"FilmesAcima1950 derive(PrimeiroGenero = iif(locate('|', genres) > 1, left(genres, locate(('|'), genres) -1), genres)) ~> ColunaDerivada",
-						"MoviesDL select(mapColumn(",
-						"          filmes = movie,",
-						"          title,",
-						"          genres,",
-						"          year,",
-						"          Rating,",
-						"          {Rotten Tomato} = {Rotton Tomato}",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> SelectCorrigeNomeColuna",
-						"ColunaDerivada window(over(PrimeiroGenero,",
-						"          year),",
-						"     asc(title, true),",
-						"     Rank = rank()) ~> JanelaRankMovies",
-						"JanelaRankMovies aggregate(groupBy(PrimeiroGenero,",
-						"          year),",
-						"     MediaAvaliacao = avg(toInteger({Rotten Tomato})),",
-						"          PrimeiroAvaliado = first(title),",
-						"          UltimoAvaliado = last(title),",
-						"          NumeroFilmes = count()) ~> AgregacaoRating",
-						"AgregacaoRating sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     partitionFileNames:['MovieFinal.csv'],",
-						"     truncate: true,",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('hash', 1)) ~> ColetorFilmes"
-					]
+					"schema": "dbo",
+					"table": "CATEGORIA_2"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/dt_transf_movie')]",
-				"[concat(variables('factoryId'), '/datasets/DatasetDatalakeDestinoFinal')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline_organizze')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CopyData",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET",
-								"paginationRules": {
-									"supportRFC5988": "true"
-								}
-							},
-							"sink": {
-								"type": "AvroSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "AvroWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['id']"
-										},
-										"sink": {
-											"name": "id",
-											"type": "Int64"
-										}
-									},
-									{
-										"source": {
-											"path": "$['name']"
-										},
-										"sink": {
-											"name": "name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['color']"
-										},
-										"sink": {
-											"name": "color",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['parent_id']"
-										},
-										"sink": {
-											"name": "parent_id",
-											"type": "String"
-										}
-									}
-								],
-								"collectionReference": "",
-								"mapComplexValuesToString": true
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DS_Organizze",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Avro1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "FormacaoED"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_Organizze')]",
-				"[concat(variables('factoryId'), '/datasets/Avro1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline_dataflow')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DataflowMovies",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "dtfmovies",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"MoviesDL": {},
-									"ColetorFilmes": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "FormacaoED"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dtfmovies')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerOrganizze')]"
 			]
 		}
 	]

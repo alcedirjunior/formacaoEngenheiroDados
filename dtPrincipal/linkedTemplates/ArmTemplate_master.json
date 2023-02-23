@@ -15,13 +15,17 @@
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorageArquivoFinal'"
 		},
+		"RestServiceOrganizze_password": {
+			"type": "secureString",
+			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+		},
 		"SqlServerMovies_connectionString": {
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerMovies'"
 		},
-		"RestServiceOrganizze_password": {
+		"SqlServerOrganizze_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerOrganizze'"
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -37,7 +41,7 @@
 		},
 		"RestServiceOrganizze_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://api.organizze.com.br/rest/v2/categories/"
+			"defaultValue": "https://api.organizze.com.br/rest/v2/"
 		},
 		"RestServiceOrganizze_properties_typeProperties_userName": {
 			"type": "string",
@@ -76,11 +80,14 @@
 					"AzureDataLakeStorageArquivoFinal_accountKey": {
 						"value": "[parameters('AzureDataLakeStorageArquivoFinal_accountKey')]"
 					},
+					"RestServiceOrganizze_password": {
+						"value": "[parameters('RestServiceOrganizze_password')]"
+					},
 					"SqlServerMovies_connectionString": {
 						"value": "[parameters('SqlServerMovies_connectionString')]"
 					},
-					"RestServiceOrganizze_password": {
-						"value": "[parameters('RestServiceOrganizze_password')]"
+					"SqlServerOrganizze_connectionString": {
+						"value": "[parameters('SqlServerOrganizze_connectionString')]"
 					},
 					"AzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage_properties_typeProperties_url')]"
@@ -100,6 +107,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "dtPrincipal_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'dtPrincipal_ArmTemplate_0')]"
+			]
 		}
 	]
 }

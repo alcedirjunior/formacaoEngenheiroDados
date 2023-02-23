@@ -11,10 +11,13 @@
 		"AzureDataLakeStorageArquivoFinal_accountKey": {
 			"value": ""
 		},
+		"RestServiceOrganizze_password": {
+			"value": ""
+		},
 		"SqlServerMovies_connectionString": {
 			"value": ""
 		},
-		"RestServiceOrganizze_password": {
+		"SqlServerOrganizze_connectionString": {
 			"value": ""
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
@@ -27,7 +30,7 @@
 			"value": "https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv"
 		},
 		"RestServiceOrganizze_properties_typeProperties_url": {
-			"value": "https://api.organizze.com.br/rest/v2/categories/"
+			"value": "https://api.organizze.com.br/rest/v2/"
 		},
 		"RestServiceOrganizze_properties_typeProperties_userName": {
 			"value": "juniorgodoy@outlook.com.br"
