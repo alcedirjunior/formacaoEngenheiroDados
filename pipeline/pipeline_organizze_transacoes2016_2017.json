@@ -26,14 +26,10 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBehavior": "upsert",
-						"upsertSettings": {
-							"useTempDB": true,
-							"keys": [
-								"ID"
-							]
-						},
-						"sqlWriterUseTableLock": false
+						"preCopyScript": "'IF OBJECT_ID(N'dbo.TRANSACOES''')IS NOT NULL DROP TABLE TRANSACOES'",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
 					},
 					"enableStaging": false,
 					"translator": {
