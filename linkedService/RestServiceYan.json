@@ -1,0 +1,12 @@
+{
+	"name": "RestServiceYan",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://involt.bitrix24.com.br/bitrix/tools/biconnector/pbi.php?token=8BEAhnwieeyCr4BXlzSXWkX5x1TADigzbr&table=crm_deal",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
