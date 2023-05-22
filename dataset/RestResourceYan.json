@@ -1,0 +1,15 @@
+{
+	"name": "RestResourceYan",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestServiceYan",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Yan"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
