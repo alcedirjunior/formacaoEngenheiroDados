@@ -16,22 +16,16 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "MapDrifted1",
-					"description": "Cria um mapeamento explícito para cada coluna em descompasso"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     limit: 100,",
+				"     limit: 1000,",
 				"     httpMethod: 'GET',",
 				"     timeout: 30,",
 				"     requestInterval: 0,",
 				"     paginationRules: ['supportRFC5988' -> 'true'],",
-				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> source1",
-				"source1 derive(headers = toMap(byName('headers'))) ~> MapDrifted1"
+				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> source1"
 			]
 		}
 	}
