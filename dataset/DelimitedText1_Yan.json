@@ -1,0 +1,40 @@
+{
+	"name": "DelimitedText1_Yan",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageArquivoFinal",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Yan"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Yan.csv",
+				"folderPath": "DestinMovies",
+				"fileSystem": "disco1"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
