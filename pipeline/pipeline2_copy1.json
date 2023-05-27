@@ -1,0 +1,67 @@
+{
+	"name": "pipeline2_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "REST API Call",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://involt.bitrix24.com.br/bitrix/tools/biconnector/pbi.php?token=8BEAhnwieeyCr4BXlzSXWkX5x1TADigzbr&table=crm_deal",
+					"method": "GET"
+				}
+			},
+			{
+				"name": "Salvar",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "REST API Call",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://saformacaoedaj.blob.core.windows.net/disco1/blobfilename.json?sp=racwdlmeop&st=2023-05-27T13:30:53Z&se=2023-05-27T21:30:53Z&spr=https&sv=2022-11-02&sr=c&sig=tzDo8yCyypNsKZ8LEHHXvg825uSdFEhq1CJayNhKetE%3D",
+					"method": "PUT",
+					"headers": {
+						"x-ms-blob-type": "BlockBlob"
+					},
+					"body": {
+						"value": "@activity('REST API Call').output",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"jsonData": {
+				"type": "Array"
+			},
+			"jasonData": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Yan"
+		},
+		"annotations": []
+	}
+}
