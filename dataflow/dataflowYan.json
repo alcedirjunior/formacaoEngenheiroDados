@@ -8,25 +8,51 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"linkedService": {
-						"referenceName": "AzureDataLakeStorage",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "RestResourceYan",
+						"type": "DatasetReference"
 					},
 					"name": "source1"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "MapDrifted1",
+					"description": "Creates an explicit mapping for each drifted column"
+				}
+			],
 			"scriptLines": [
-				"source(useSchema: false,",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     limit: 1000,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'json',",
-				"     fileSystem: 'disco1',",
-				"     fileName: 'blobfilename.json',",
-				"     documentForm: 'singleDocument') ~> source1"
+				"     httpMethod: 'GET',",
+				"     timeout: 30) ~> source1",
+				"source1 derive(body = toString(byName('body')),",
+				"          headers = toString(byName('headers'))) ~> MapDrifted1",
+				"MapDrifted1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          movie as string,",
+				"          title as string,",
+				"          genres as string,",
+				"          year as string,",
+				"          Rating as string,",
+				"          {Rotton Tomato} as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
