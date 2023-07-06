@@ -35,6 +35,9 @@
 		"RestServiceOrganizze_properties_typeProperties_userName": {
 			"value": "juniorgodoy@outlook.com.br"
 		},
+		"RestServiceYan_properties_typeProperties_url": {
+			"value": "https://involt.bitrix24.com.br/bitrix/tools/biconnector/pbi.php?token=8BEAhnwieeyCr4BXlzSXWkX5x1TADigzbr&table=crm_deal"
+		},
 		"containerUri": {
 			"value": ""
 		},

@@ -4,28 +4,28 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nome do Data Factory",
+			"metadata": "Data Factory name",
 			"defaultValue": "dtPrincipal"
 		},
 		"AzureDataLakeStorage_accountKey": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorage'"
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage'"
 		},
 		"AzureDataLakeStorageArquivoFinal_accountKey": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorageArquivoFinal'"
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorageArquivoFinal'"
 		},
 		"RestServiceOrganizze_password": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+			"metadata": "Secure string for 'password' of 'RestServiceOrganizze'"
 		},
 		"SqlServerMovies_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerMovies'"
+			"metadata": "Secure string for 'connectionString' of 'SqlServerMovies'"
 		},
 		"SqlServerOrganizze_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerOrganizze'"
+			"metadata": "Secure string for 'connectionString' of 'SqlServerOrganizze'"
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -47,13 +47,17 @@
 			"type": "string",
 			"defaultValue": "juniorgodoy@outlook.com.br"
 		},
+		"RestServiceYan_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://involt.bitrix24.com.br/bitrix/tools/biconnector/pbi.php?token=8BEAhnwieeyCr4BXlzSXWkX5x1TADigzbr&table=crm_deal"
+		},
 		"containerUri": {
 			"type": "string",
-			"metadata": "URI para a conta de armazenamento contendo os modelos do ARM vinculados"
+			"metadata": "URI to storage account containing linked ARM templates"
 		},
 		"containerSasToken": {
 			"type": "string",
-			"metadata": "Token SAS para a conta de armazenamento contendo modelos do ARM vinculados"
+			"metadata": "Sas token to storage account containing linked ARM templates"
 		}
 	},
 	"variables": {
@@ -86,9 +90,6 @@
 					"SqlServerMovies_connectionString": {
 						"value": "[parameters('SqlServerMovies_connectionString')]"
 					},
-					"SqlServerOrganizze_connectionString": {
-						"value": "[parameters('SqlServerOrganizze_connectionString')]"
-					},
 					"AzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage_properties_typeProperties_url')]"
 					},
@@ -103,6 +104,9 @@
 					},
 					"RestServiceOrganizze_properties_typeProperties_userName": {
 						"value": "[parameters('RestServiceOrganizze_properties_typeProperties_userName')]"
+					},
+					"RestServiceYan_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceYan_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -121,6 +125,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"SqlServerOrganizze_connectionString": {
+						"value": "[parameters('SqlServerOrganizze_connectionString')]"
 					}
 				}
 			},

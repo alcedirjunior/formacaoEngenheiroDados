@@ -4,28 +4,28 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nome do Data Factory",
+			"metadata": "Data Factory name",
 			"defaultValue": "dtPrincipal"
 		},
 		"AzureDataLakeStorage_accountKey": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorage'"
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage'"
 		},
 		"AzureDataLakeStorageArquivoFinal_accountKey": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'accountKey' de 'AzureDataLakeStorageArquivoFinal'"
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorageArquivoFinal'"
 		},
 		"RestServiceOrganizze_password": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'password' de 'RestServiceOrganizze'"
+			"metadata": "Secure string for 'password' of 'RestServiceOrganizze'"
 		},
 		"SqlServerMovies_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerMovies'"
+			"metadata": "Secure string for 'connectionString' of 'SqlServerMovies'"
 		},
 		"SqlServerOrganizze_connectionString": {
 			"type": "secureString",
-			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'SqlServerOrganizze'"
+			"metadata": "Secure string for 'connectionString' of 'SqlServerOrganizze'"
 		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -46,6 +46,10 @@
 		"RestServiceOrganizze_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "juniorgodoy@outlook.com.br"
+		},
+		"RestServiceYan_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://involt.bitrix24.com.br/bitrix/tools/biconnector/pbi.php?token=8BEAhnwieeyCr4BXlzSXWkX5x1TADigzbr&table=crm_deal"
 		}
 	},
 	"variables": {
@@ -148,6 +152,202 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_Movies')]",
 				"[concat(variables('factoryId'), '/datasets/DS_tblMovies')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data Yan",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "RestResourceYan",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText1_Yan",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Yan"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RestResourceYan')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1_Yan')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline2_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "REST API Call",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://involt.bitrix24.com.br/bitrix/tools/biconnector/pbi.php?token=8BEAhnwieeyCr4BXlzSXWkX5x1TADigzbr&table=crm_deal",
+							"method": "GET",
+							"headers": {}
+						}
+					},
+					{
+						"name": "Salvar",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "REST API Call",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://saformacaoedaj.blob.core.windows.net/disco1/blobfilename.json?sp=racwdlmeop&st=2023-05-27T13:30:53Z&se=2023-05-27T21:30:53Z&spr=https&sv=2022-11-02&sr=c&sig=tzDo8yCyypNsKZ8LEHHXvg825uSdFEhq1CJayNhKetE%3D",
+							"method": "PUT",
+							"headers": {
+								"x-ms-blob-type": "BlockBlob"
+							},
+							"body": {
+								"value": "@activity('REST API Call').output",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"jsonData": {
+						"type": "Array"
+					},
+					"jasonData": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "Yan"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflowYan",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflowYan",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Yan"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflowYan')]"
 			]
 		},
 		{
@@ -1161,6 +1361,52 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2018_2019')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "transactions?start_date=2018-01-01&end_date=2019-12-31"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2023')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2023-12-31"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizzeCategoria')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1468,6 +1714,125 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1_Yan')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageArquivoFinal",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Yan"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Yan.csv",
+						"folderPath": "DestinMovies",
+						"fileSystem": "disco1"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageArquivoFinal",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "Destino",
+						"fileSystem": "disco1"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "movie",
+						"type": "String"
+					},
+					{
+						"name": "title",
+						"type": "String"
+					},
+					{
+						"name": "genres",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "Rating",
+						"type": "String"
+					},
+					{
+						"name": "Rotton Tomato",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResourceYan')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceYan",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Yan"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceYan')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dt_transf_movie')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1600,6 +1965,21 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/RestServiceYan')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('RestServiceYan_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerMovies')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1640,6 +2020,72 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflowYan')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "FormacaoED"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "RestResourceYan",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText2",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "MapDrifted1",
+							"description": "Creates an explicit mapping for each drifted column"
+						}
+					],
+					"scriptLines": [
+						"source(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     limit: 1000,",
+						"     httpMethod: 'GET',",
+						"     timeout: 30,",
+						"     requestInterval: 0) ~> source1",
+						"source1 derive(body = toString(byName('body')),",
+						"          headers = toString(byName('headers'))) ~> MapDrifted1",
+						"MapDrifted1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          movie as string,",
+						"          title as string,",
+						"          genres as string,",
+						"          year as string,",
+						"          Rating as string,",
+						"          {Rotton Tomato} as string",
+						"     ),",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RestResourceYan')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText2')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dtfmovies')]",
@@ -1736,52 +2182,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/dt_transf_movie')]",
 				"[concat(variables('factoryId'), '/datasets/DatasetDatalakeDestinoFinal')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2018_2019')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceOrganizze",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Organizze"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": "transactions?start_date=2018-01-01&end_date=2019-12-31"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2023')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestServiceOrganizze",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Organizze"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2023-12-31"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
 			]
 		}
 	]
