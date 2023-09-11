@@ -111,7 +111,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "TRANSACOES_2"
+			"table": "TRANSACOES_3"
 		}
 	}
 }
