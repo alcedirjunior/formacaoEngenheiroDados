@@ -1,0 +1,117 @@
+{
+	"name": "DS_SqlServerOrganizzeTransacoes3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerOrganizze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "varchar"
+			},
+			{
+				"name": "DATE",
+				"type": "date"
+			},
+			{
+				"name": "PAID",
+				"type": "varchar"
+			},
+			{
+				"name": "AMOUNT_CENTS",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TOTAL_INSTALLMENTS",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "INSTALLMENT",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RECURRING",
+				"type": "varchar"
+			},
+			{
+				"name": "ACCOUNT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CATEGORYA_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NOTES",
+				"type": "varchar"
+			},
+			{
+				"name": "ATTACHMENTS_COUNT",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CREDIT_CARD_ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "CREDIT_CARD_INVOICE_ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "PAID_CREDIT_CARD_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PAID_CREDIT_CARD_INVOICE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OPOSITE_TRANSACTION_ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "OPOSITE_ACCOUNT_ID",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "CREATE_AT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UPDATE_AT",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TRANSACOES_2"
+		}
+	}
+}
