@@ -1,5 +1,5 @@
 {
-	"name": "DS_Organizze_Transacoes2020_2023",
+	"name": "DS_Organizze_Transacoes2020_2021",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceOrganizze",
