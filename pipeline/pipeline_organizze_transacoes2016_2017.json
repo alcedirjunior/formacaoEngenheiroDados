@@ -235,11 +235,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"table": {
-								"value": "@pipeline().parameters.schema",
+								"value": "@pipeline().parameters.table",
 								"type": "Expression"
 							},
 							"schema": {
-								"value": "@pipeline().parameters.table",
+								"value": "@pipeline().parameters.schema",
 								"type": "Expression"
 							}
 						}
