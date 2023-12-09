@@ -8,7 +8,11 @@
 		"parameters": {
 			"table": {
 				"type": "string",
-				"defaultValue": "dbo.TRASACOES"
+				"defaultValue": "TRASACOES"
+			},
+			"schema": {
+				"type": "string",
+				"defaultValue": "dbo"
 			}
 		},
 		"folder": {
