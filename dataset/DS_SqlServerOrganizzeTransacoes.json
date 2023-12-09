@@ -120,8 +120,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "TRANSACOES_2"
+			"schema": {
+				"value": "@dataset().schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().table",
+				"type": "Expression"
+			}
 		}
 	}
 }
