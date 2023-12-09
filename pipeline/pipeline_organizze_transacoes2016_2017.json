@@ -26,7 +26,10 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"preCopyScript": "IF OBJECT_ID('TRANSACOES_2')IS NOT NULL DROP TABLE TRANSACOES_2",
+						"preCopyScript": {
+							"value": "@{concat('IF OBJECT_ID(''',pipeline().parameters.schema, '.', pipeline().parameters.table,''')IS NOT NULL DROP TABLE ',pipeline().parameters.schema, '.', pipeline().parameters.table,'')}",
+							"type": "Expression"
+						},
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate"
@@ -229,7 +232,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SqlServerOrganizzeTransacoes",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							},
+							"schema": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -471,7 +484,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SqlServerOrganizzeTransacoes",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							},
+							"schema": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -713,7 +736,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SqlServerOrganizzeTransacoes",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							},
+							"schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -955,11 +988,29 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SqlServerOrganizzeTransacoes",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"table": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							},
+							"schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"schema": {
+				"type": "string"
+			},
+			"table": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "FormacaoED"
 		},
