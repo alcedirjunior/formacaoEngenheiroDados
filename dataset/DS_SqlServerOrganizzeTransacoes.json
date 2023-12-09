@@ -5,6 +5,12 @@
 			"referenceName": "SqlServerOrganizze",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"table": {
+				"type": "string",
+				"defaultValue": "dbo.TRASACOES"
+			}
+		},
 		"folder": {
 			"name": "Organizze"
 		},
