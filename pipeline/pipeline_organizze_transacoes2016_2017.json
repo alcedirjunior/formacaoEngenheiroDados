@@ -1005,10 +1005,12 @@
 		],
 		"parameters": {
 			"schema": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "DBO"
 			},
 			"table": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "TRANSACOES"
 			}
 		},
 		"folder": {
