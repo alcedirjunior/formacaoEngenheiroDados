@@ -84,7 +84,10 @@
 				"inputs": [
 					{
 						"referenceName": "DS_Organizze",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"url_relativa": "categories/"
+						}
 					}
 				],
 				"outputs": [
