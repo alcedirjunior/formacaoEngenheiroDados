@@ -5,13 +5,21 @@
 			"referenceName": "RestServiceOrganizze",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"url_relativa": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Organizze"
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "categories/"
+			"relativeUrl": {
+				"value": "@dataset().url_relativa",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}
