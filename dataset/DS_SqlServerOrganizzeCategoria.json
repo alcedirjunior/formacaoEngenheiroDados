@@ -5,6 +5,15 @@
 			"referenceName": "SqlServerOrganizze",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"schema": {
+				"type": "string",
+				"defaultValue": "dbo"
+			},
+			"tabela": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Organizze"
 		},
@@ -29,8 +38,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "CATEGORIA_2"
+			"schema": {
+				"value": "@dataset().schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tabela",
+				"type": "Expression"
+			}
 		}
 	}
 }
