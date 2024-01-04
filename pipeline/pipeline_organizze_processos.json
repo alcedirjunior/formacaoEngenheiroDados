@@ -104,6 +104,13 @@
 		"parameters": {
 			"url_relativa": {
 				"type": "string"
+			},
+			"schema": {
+				"type": "string",
+				"defaultValue": "dbo"
+			},
+			"tabela": {
+				"type": "string"
 			}
 		},
 		"folder": {
