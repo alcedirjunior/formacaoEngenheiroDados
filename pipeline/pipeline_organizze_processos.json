@@ -96,7 +96,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SqlServerOrganizzeCategoria",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							},
+							"tabela": {
+								"value": "@pipeline().parameters.tabela",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
