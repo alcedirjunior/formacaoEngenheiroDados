@@ -39,45 +39,6 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['id']"
-								},
-								"sink": {
-									"name": "ID",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['name']"
-								},
-								"sink": {
-									"name": "NAME",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['color']"
-								},
-								"sink": {
-									"name": "COLOR",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['parent_id']"
-								},
-								"sink": {
-									"name": "PARENT_ID",
-									"type": "String"
-								}
-							}
-						],
-						"collectionReference": "",
 						"mapComplexValuesToString": true
 					}
 				},
