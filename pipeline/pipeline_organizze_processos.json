@@ -19,7 +19,7 @@
 						"type": "RestSource",
 						"additionalColumns": [
 							{
-								"name": "DATA LOADING",
+								"name": "data loading",
 								"value": {
 									"value": "@formatDateTime(utcNow(),'yyyy-MM-ddTHH:mm:ssZ')",
 									"type": "Expression"
