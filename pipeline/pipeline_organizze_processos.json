@@ -86,7 +86,10 @@
 						"referenceName": "DS_Organizze",
 						"type": "DatasetReference",
 						"parameters": {
-							"url_relativa": "categories/"
+							"url_relativa": {
+								"value": "@pipeline().parameters.url_relativa",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -98,6 +101,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"url_relativa": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Organizze"
 		},
