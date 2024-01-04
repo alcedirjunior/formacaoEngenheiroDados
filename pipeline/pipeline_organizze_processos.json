@@ -21,7 +21,7 @@
 							{
 								"name": "data loading",
 								"value": {
-									"value": "@formatDateTime(utcNow(),'yyyy-MM-ddTHH:mm:ssZ')",
+									"value": "@formatDateTime(convertTimeZone(utcNow(), 'UTC', 'E. South America Standard Time'), 'yyyy-MM-dd HH:mm:ss')\n",
 									"type": "Expression"
 								}
 							}
