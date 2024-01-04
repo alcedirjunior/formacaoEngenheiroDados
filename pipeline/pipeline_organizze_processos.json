@@ -1,0 +1,106 @@
+{
+	"name": "pipeline_organizze_processos",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyData",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": false,
+							"keys": [
+								"ID"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name']"
+								},
+								"sink": {
+									"name": "NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['color']"
+								},
+								"sink": {
+									"name": "COLOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['parent_id']"
+								},
+								"sink": {
+									"name": "PARENT_ID",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Organizze",
+						"type": "DatasetReference",
+						"parameters": {
+							"url_relativa": "categories/"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_SqlServerOrganizzeCategoria",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": []
+	}
+}
