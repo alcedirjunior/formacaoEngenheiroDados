@@ -19,6 +19,31 @@
 						"tabela": "METAS"
 					}
 				}
+			},
+			{
+				"name": "categorias",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "metas",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipeline_organizze_processos",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"url_relativa": "categories",
+						"schema": "1_RAW",
+						"tabela": "CATEGORIAS"
+					}
+				}
 			}
 		],
 		"folder": {
