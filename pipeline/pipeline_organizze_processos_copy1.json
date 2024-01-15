@@ -1,0 +1,538 @@
+{
+	"name": "pipeline_organizze_processos_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyData",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": false,
+							"keys": [
+								"ID"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['date']"
+								},
+								"sink": {
+									"name": "date",
+									"type": "Date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['starting_date']"
+								},
+								"sink": {
+									"name": "starting_date",
+									"type": "Date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['closing_date']"
+								},
+								"sink": {
+									"name": "closing_date",
+									"type": "Date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['amount_cents']"
+								},
+								"sink": {
+									"name": "amount_cents",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payment_amount_cents']"
+								},
+								"sink": {
+									"name": "payment_amount_cents",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['balance_cents']"
+								},
+								"sink": {
+									"name": "balance_cents",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['previous_balance_cents']"
+								},
+								"sink": {
+									"name": "previous_balance_cents",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['credit_card_id']"
+								},
+								"sink": {
+									"name": "credit_card_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['id']"
+								},
+								"sink": {
+									"name": "transactions_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['description']"
+								},
+								"sink": {
+									"name": "transactions_description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['date']"
+								},
+								"sink": {
+									"name": "transactions_date",
+									"type": "Date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['paid']"
+								},
+								"sink": {
+									"name": "transactions_paid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['amount_cents']"
+								},
+								"sink": {
+									"name": "transactions_amount"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['total_installments']"
+								},
+								"sink": {
+									"name": "transactions_total_installments",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['installment']"
+								},
+								"sink": {
+									"name": "transactions_installment",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['recurring']"
+								},
+								"sink": {
+									"name": "transactions_recurring",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['account_id']"
+								},
+								"sink": {
+									"name": "transactions_account_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['account_type']"
+								},
+								"sink": {
+									"name": "transactions_account_type",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['category_id']"
+								},
+								"sink": {
+									"name": "transactions_category_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['notes']"
+								},
+								"sink": {
+									"name": "transactions_notes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['attachments_count']"
+								},
+								"sink": {
+									"name": "transactions_attachments_count",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['credit_card_id']"
+								},
+								"sink": {
+									"name": "transactions_credit_card_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "transactions_credit_card_invoice_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['paid_credit_card_id']"
+								},
+								"sink": {
+									"name": "transactions_paid_credit_card_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['paid_credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "transactions_paid_credit_card_invoice_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['created_at']"
+								},
+								"sink": {
+									"name": "transactions_created_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['updated_at']"
+								},
+								"sink": {
+									"name": "transactions_updated_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['transactions'][0]['tags']"
+								},
+								"sink": {
+									"name": "transactions_tags",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['id']"
+								},
+								"sink": {
+									"name": "payments_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['description']"
+								},
+								"sink": {
+									"name": "payments_description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['date']"
+								},
+								"sink": {
+									"name": "payments_date",
+									"type": "Date"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['paid']"
+								},
+								"sink": {
+									"name": "payments_paid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['amount_cents']"
+								},
+								"sink": {
+									"name": "payments_amount_cents",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['total_installments']"
+								},
+								"sink": {
+									"name": "payments_total_installments",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['installment']"
+								},
+								"sink": {
+									"name": "payments_installment",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['recurring']"
+								},
+								"sink": {
+									"name": "payments_recurring",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['account_id']"
+								},
+								"sink": {
+									"name": "payments_account_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['account_type']"
+								},
+								"sink": {
+									"name": "payments_account_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['category_id']"
+								},
+								"sink": {
+									"name": "payments_category_id'",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['notes']"
+								},
+								"sink": {
+									"name": "payments_notes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['attachments_count']"
+								},
+								"sink": {
+									"name": "payments_attachments_count",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['credit_card_id']"
+								},
+								"sink": {
+									"name": "payments_credit_card_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "payments_credit_card_invoice_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['paid_credit_card_id']"
+								},
+								"sink": {
+									"name": "payments_paid_credit_card_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['paid_credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "payments_paid_credit_card_invoice_id",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['created_at']"
+								},
+								"sink": {
+									"name": "payments_created_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['updated_at']"
+								},
+								"sink": {
+									"name": "payments_updated_at",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['payments'][0]['tags']"
+								},
+								"sink": {
+									"name": "payments_tags",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Organizze",
+						"type": "DatasetReference",
+						"parameters": {
+							"url_relativa": {
+								"value": "@concat('credit_cards/',pipeline().parameters.id_cartao,'/invoices/',pipeline().parameters.id_fatura)",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_SqlServerOrganizzeCategoria",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							},
+							"tabela": {
+								"value": "@pipeline().parameters.tabela",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"id_cartao": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string",
+				"defaultValue": "dbo"
+			},
+			"tabela": {
+				"type": "string"
+			},
+			"id_fatura": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": []
+	}
+}
