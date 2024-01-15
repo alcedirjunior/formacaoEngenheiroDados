@@ -152,7 +152,11 @@
 					"parameters": {
 						"url_relativa": "credit_cards",
 						"schema": "1_RAW",
-						"tabela": "CARTOES"
+						"tabela": "CARTOES",
+						"pre_copy": {
+							"value": "TRUNCATE TABLE [1_RAW].[CARTOES]",
+							"type": "Expression"
+						}
 					}
 				}
 			}
