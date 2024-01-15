@@ -306,7 +306,7 @@
 								},
 								"sink": {
 									"name": "payments_id",
-									"type": "Int32"
+									"type": "Int64"
 								}
 							},
 							{
