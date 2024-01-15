@@ -78,7 +78,8 @@
 					"dataset": {
 						"referenceName": "DS_SqlServerOrganizze_Pesquisa",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
