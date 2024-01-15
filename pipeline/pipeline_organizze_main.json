@@ -98,6 +98,7 @@
 						"value": "@activity('Lookup Cartoes').output",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "cartoes_transacoes",
