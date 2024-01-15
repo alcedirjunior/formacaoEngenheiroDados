@@ -50,58 +50,11 @@
 				}
 			},
 			{
-				"name": "cartoes",
-				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pipeline_organizze_processos",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"url_relativa": "credit_cards",
-						"schema": "1_RAW",
-						"tabela": "CARTOES"
-					}
-				}
-			},
-			{
-				"name": "cartoes_transacoes",
-				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "cartoes",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pipeline_organizze_processos",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"url_relativa": "credit_cards/622654/invoices",
-						"schema": "1_RAW",
-						"tabela": "CARTOES_TRANSACOES"
-					}
-				}
-			},
-			{
 				"name": "Lookup Cartoes",
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "categorias",
+						"activity": "cartoes",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -118,13 +71,82 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT\nDISTINCT ID\nFROM [1_RAW].CARTOES\nWHERE ARCHIVED = 0",
+						"sqlReaderQuery": "SELECT\nDISTINCT id as id_cartoes\nFROM [1_RAW].CARTOES\nWHERE ARCHIVED = 0",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
 						"referenceName": "DS_SqlServerOrganizze_Pesquisa",
 						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "ForEach Cartoes",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup Cartoes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup Cartoes').output",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "cartoes_transacoes",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pipeline_organizze_processos",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"url_relativa": {
+										"value": "@concat('credit_cards/',item().id_cartoes,'/invoices')",
+										"type": "Expression"
+									},
+									"schema": "1_RAW",
+									"tabela": "CARTOES_TRANSACOES"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "cartoes",
+				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "categorias",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipeline_organizze_processos",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"url_relativa": "credit_cards",
+						"schema": "1_RAW",
+						"tabela": "CARTOES"
 					}
 				}
 			}
