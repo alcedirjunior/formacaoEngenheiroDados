@@ -1,0 +1,32 @@
+{
+	"name": "DS_SqlServerOrganizze_Pesquisa",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerOrganizze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Organizze"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "varchar"
+			},
+			{
+				"name": "NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "COLOR",
+				"type": "varchar"
+			},
+			{
+				"name": "PARENT_ID",
+				"type": "varchar"
+			}
+		]
+	}
+}
