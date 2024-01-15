@@ -171,7 +171,7 @@
 									"path": "['credit_card_invoice_id']"
 								},
 								"sink": {
-									"name": "transactions_paid_credit_card_invoice_id",
+									"name": "transactions_credit_card_invoice_id",
 									"type": "String"
 								}
 							},
