@@ -1,5 +1,5 @@
 {
-	"name": "DS_SqlServerOrganizzeCategoria",
+	"name": "DS_SqlServerOrganizze",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SqlServerOrganizze",
