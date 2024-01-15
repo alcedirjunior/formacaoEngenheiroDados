@@ -93,8 +93,6 @@
 			{
 				"name": "ForEach Cartoes",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Script1",
