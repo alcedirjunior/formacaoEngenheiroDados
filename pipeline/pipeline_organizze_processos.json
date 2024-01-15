@@ -35,14 +35,11 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBehavior": "upsert",
-						"upsertSettings": {
-							"useTempDB": false,
-							"keys": [
-								"ID"
-							],
-							"interimSchemaName": ""
+						"preCopyScript": {
+							"value": "@pipeline().parameters.pre_copy",
+							"type": "Expression"
 						},
+						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate"
 					},
@@ -91,6 +88,9 @@
 				"defaultValue": "dbo"
 			},
 			"tabela": {
+				"type": "string"
+			},
+			"pre_copy": {
 				"type": "string"
 			}
 		},
