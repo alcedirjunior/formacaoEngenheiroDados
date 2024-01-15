@@ -28,13 +28,13 @@
 						"type": "SqlServerSink",
 						"writeBehavior": "upsert",
 						"upsertSettings": {
-							"useTempDB": true,
+							"useTempDB": false,
 							"keys": [
 								"ID"
-							]
+							],
+							"interimSchemaName": ""
 						},
-						"sqlWriterUseTableLock": false,
-						"tableOption": "autoCreate"
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -42,97 +42,16 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['id']"
-								},
-								"sink": {
-									"name": "id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['date']"
-								},
-								"sink": {
-									"name": "date",
-									"type": "Date"
-								}
-							},
-							{
-								"source": {
-									"path": "$['starting_date']"
-								},
-								"sink": {
-									"name": "starting_date",
-									"type": "Date"
-								}
-							},
-							{
-								"source": {
-									"path": "$['closing_date']"
-								},
-								"sink": {
-									"name": "closing_date",
-									"type": "Date"
-								}
-							},
-							{
-								"source": {
-									"path": "$['amount_cents']"
-								},
-								"sink": {
-									"name": "amount_cents",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payment_amount_cents']"
-								},
-								"sink": {
-									"name": "payment_amount_cents",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['balance_cents']"
-								},
-								"sink": {
-									"name": "balance_cents",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['previous_balance_cents']"
-								},
-								"sink": {
-									"name": "previous_balance_cents",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['credit_card_id']"
-								},
-								"sink": {
-									"name": "credit_card_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['transactions'][0]['id']"
+									"path": "['id']"
 								},
 								"sink": {
 									"name": "transactions_id",
-									"type": "Int64"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['description']"
+									"path": "['description']"
 								},
 								"sink": {
 									"name": "transactions_description",
@@ -141,16 +60,16 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['date']"
+									"path": "['date']"
 								},
 								"sink": {
 									"name": "transactions_date",
-									"type": "Date"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['paid']"
+									"path": "['paid']"
 								},
 								"sink": {
 									"name": "transactions_paid",
@@ -159,33 +78,34 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['amount_cents']"
+									"path": "['amount_cents']"
 								},
 								"sink": {
-									"name": "transactions_amount"
+									"name": "transactions_amount",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['total_installments']"
+									"path": "['total_installments']"
 								},
 								"sink": {
 									"name": "transactions_total_installments",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['installment']"
+									"path": "['installment']"
 								},
 								"sink": {
 									"name": "transactions_installment",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['recurring']"
+									"path": "['recurring']"
 								},
 								"sink": {
 									"name": "transactions_recurring",
@@ -194,15 +114,16 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['account_id']"
+									"path": "['account_id']"
 								},
 								"sink": {
-									"name": "transactions_account_id"
+									"name": "transactions_account_id",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['account_type']"
+									"path": "['account_type']"
 								},
 								"sink": {
 									"name": "transactions_account_type",
@@ -211,16 +132,16 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['category_id']"
+									"path": "['category_id']"
 								},
 								"sink": {
 									"name": "transactions_category_id",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['notes']"
+									"path": "['notes']"
 								},
 								"sink": {
 									"name": "transactions_notes",
@@ -229,52 +150,52 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['attachments_count']"
+									"path": "['attachments_count']"
 								},
 								"sink": {
 									"name": "transactions_attachments_count",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['credit_card_id']"
+									"path": "['credit_card_id']"
 								},
 								"sink": {
 									"name": "transactions_credit_card_id",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['credit_card_invoice_id']"
-								},
-								"sink": {
-									"name": "transactions_credit_card_invoice_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['transactions'][0]['paid_credit_card_id']"
-								},
-								"sink": {
-									"name": "transactions_paid_credit_card_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['transactions'][0]['paid_credit_card_invoice_id']"
+									"path": "['credit_card_invoice_id']"
 								},
 								"sink": {
 									"name": "transactions_paid_credit_card_invoice_id",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['created_at']"
+									"path": "['paid_credit_card_id']"
+								},
+								"sink": {
+									"name": "transactions_paid_credit_card_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['paid_credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "transactions_paid_credit_card_invoice_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['created_at']"
 								},
 								"sink": {
 									"name": "transactions_created_at",
@@ -283,7 +204,7 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['updated_at']"
+									"path": "['updated_at']"
 								},
 								"sink": {
 									"name": "transactions_updated_at",
@@ -292,7 +213,7 @@
 							},
 							{
 								"source": {
-									"path": "$['transactions'][0]['tags']"
+									"path": "['tags']"
 								},
 								"sink": {
 									"name": "transactions_tags",
@@ -301,186 +222,87 @@
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['id']"
+									"path": "$['id']"
 								},
 								"sink": {
-									"name": "payments_id",
-									"type": "Int64"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['description']"
-								},
-								"sink": {
-									"name": "payments_description",
+									"name": "id",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['date']"
+									"path": "$['date']"
 								},
 								"sink": {
-									"name": "payments_date",
-									"type": "Date"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['paid']"
-								},
-								"sink": {
-									"name": "payments_paid",
+									"name": "date",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['amount_cents']"
+									"path": "$['starting_date']"
 								},
 								"sink": {
-									"name": "payments_amount_cents",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['total_installments']"
-								},
-								"sink": {
-									"name": "payments_total_installments",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['installment']"
-								},
-								"sink": {
-									"name": "payments_installment",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['recurring']"
-								},
-								"sink": {
-									"name": "payments_recurring",
+									"name": "starting_date",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['account_id']"
+									"path": "$['closing_date']"
 								},
 								"sink": {
-									"name": "payments_account_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['account_type']"
-								},
-								"sink": {
-									"name": "payments_account_type",
+									"name": "closing_date",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['category_id']"
+									"path": "$['amount_cents']"
 								},
 								"sink": {
-									"name": "payments_category_id'",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['notes']"
-								},
-								"sink": {
-									"name": "payments_notes",
+									"name": "amount_cents",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['attachments_count']"
+									"path": "$['payment_amount_cents']"
 								},
 								"sink": {
-									"name": "payments_attachments_count",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['credit_card_id']"
-								},
-								"sink": {
-									"name": "payments_credit_card_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['credit_card_invoice_id']"
-								},
-								"sink": {
-									"name": "payments_credit_card_invoice_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['paid_credit_card_id']"
-								},
-								"sink": {
-									"name": "payments_paid_credit_card_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['paid_credit_card_invoice_id']"
-								},
-								"sink": {
-									"name": "payments_paid_credit_card_invoice_id",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['payments'][0]['created_at']"
-								},
-								"sink": {
-									"name": "payments_created_at",
+									"name": "payment_amount_cents",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['updated_at']"
+									"path": "$['balance_cents']"
 								},
 								"sink": {
-									"name": "payments_updated_at",
+									"name": "balance_cents",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['payments'][0]['tags']"
+									"path": "$['previous_balance_cents']"
 								},
 								"sink": {
-									"name": "payments_tags",
+									"name": "previous_balance_cents",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['credit_card_id']"
+								},
+								"sink": {
+									"name": "credit_card_id",
 									"type": "String"
 								}
 							}
 						],
-						"collectionReference": "",
+						"collectionReference": "$['transactions']",
 						"mapComplexValuesToString": true
 					}
 				},
