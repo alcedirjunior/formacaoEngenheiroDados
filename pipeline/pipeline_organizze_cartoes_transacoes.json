@@ -313,7 +313,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_SqlServerOrganizzeCategoria",
+						"referenceName": "DS_SqlServerOrganizze",
 						"type": "DatasetReference",
 						"parameters": {
 							"schema": {
