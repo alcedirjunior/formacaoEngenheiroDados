@@ -18,7 +18,11 @@
 					"parameters": {
 						"url_relativa": "budgets",
 						"schema": "1_RAW",
-						"tabela": "METAS"
+						"tabela": "METAS",
+						"pre_copy": {
+							"value": "TRUNCATE TABLE [1_RAW].METAS",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -45,7 +49,11 @@
 					"parameters": {
 						"url_relativa": "categories",
 						"schema": "1_RAW",
-						"tabela": "CATEGORIAS"
+						"tabela": "CATEGORIAS",
+						"pre_copy": {
+							"value": "TRUNCATE TABLE [1_RAW].CATEGORIAS",
+							"type": "Expression"
+						}
 					}
 				}
 			},
