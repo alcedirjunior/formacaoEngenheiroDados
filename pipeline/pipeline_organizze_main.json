@@ -5,6 +5,8 @@
 			{
 				"name": "metas",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -23,6 +25,8 @@
 			{
 				"name": "categorias",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "metas",
@@ -42,6 +46,31 @@
 						"url_relativa": "categories",
 						"schema": "1_RAW",
 						"tabela": "CATEGORIAS"
+					}
+				}
+			},
+			{
+				"name": "cartoes",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "categorias",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipeline_organizze_processos",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"url_relativa": "credit_cards",
+						"schema": "1_RAW",
+						"tabela": "CARTOES"
 					}
 				}
 			}
