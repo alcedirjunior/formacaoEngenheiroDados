@@ -96,10 +96,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Lookup Cartoes').output.value",
+						"value": "@activity('Lookup Cartoes').output",
 						"type": "Expression"
 					},
-					"isSequential": true,
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "cartoes_transacoes",
