@@ -207,7 +207,7 @@
 								},
 								"sink": {
 									"name": "transactions_account_type",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
