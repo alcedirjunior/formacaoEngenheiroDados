@@ -118,7 +118,11 @@
 										"type": "Expression"
 									},
 									"schema": "1_RAW",
-									"tabela": "CARTOES_TRANSACOES"
+									"tabela": "CARTOES_TRANSACOES",
+									"pre_copy": {
+										"value": "TRUNCATE TABLE [1_RAW].[CARTOES_TRANSACOES]",
+										"type": "Expression"
+									}
 								}
 							}
 						}
