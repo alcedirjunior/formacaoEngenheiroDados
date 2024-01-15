@@ -28,11 +28,10 @@
 						"type": "SqlServerSink",
 						"writeBehavior": "upsert",
 						"upsertSettings": {
-							"useTempDB": false,
+							"useTempDB": true,
 							"keys": [
 								"ID"
-							],
-							"interimSchemaName": ""
+							]
 						},
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate"
