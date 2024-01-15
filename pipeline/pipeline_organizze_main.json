@@ -102,31 +102,6 @@
 						"tabela": "CARTOES_TRANSACOES"
 					}
 				}
-			},
-			{
-				"name": "cartoes_transacoes_detalhada",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "cartoes_transacoes",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pipeline_organizze_processos",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"url_relativa": "credit_cards/622654/invoices/288",
-						"schema": "1_RAW",
-						"tabela": "CARTOES_TRANSACOES_DETALHADA"
-					}
-				}
 			}
 		],
 		"folder": {
