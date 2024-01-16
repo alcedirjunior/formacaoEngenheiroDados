@@ -122,7 +122,7 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"url_relativa": {
-										"value": "@concat('credit_cards/',item().id_cartoes,'/invoices?start_date=2023-01-01&end_date=2023-12-31')",
+										"value": "@concat('credit_cards/',item().id_cartoes,'/invoices?start_date=2023-01-01&end_date=2024-12-31')",
 										"type": "Expression"
 									},
 									"schema": "1_RAW",
