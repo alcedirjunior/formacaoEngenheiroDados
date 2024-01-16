@@ -196,6 +196,108 @@
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
 				}
+			},
+			{
+				"name": "Lookup Cartoes Transacoes",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT DISTINCT \n    id as id_trasacao\n    ,credit_card_id as id_cartao\nFROM [1_RAW].CARTOES_TRANSACOES",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_SqlServerOrganizze_Pesquisa",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach Cartoes_copy1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "TRUNCATE CARTOES_TRANSACOES_DETALHADAS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup Cartoes').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "cartoes_transacoes_copy1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pipeline_organizze_processos",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"url_relativa": {
+										"value": "@concat('credit_cards/',item().id_cartoes,'/invoices?start_date=2023-01-01&end_date=2024-12-31')",
+										"type": "Expression"
+									},
+									"schema": "1_RAW",
+									"tabela": "CARTOES_TRANSACOES"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "TRUNCATE CARTOES_TRANSACOES_DETALHADAS",
+				"type": "Script",
+				"dependsOn": [
+					{
+						"activity": "Lookup Cartoes Transacoes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "SqlServerOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "TRUNCATE TABLE [1_RAW].[CARTOES_TRANSACOES_DETALHADAS]"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
 			}
 		],
 		"folder": {
