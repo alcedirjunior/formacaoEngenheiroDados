@@ -250,27 +250,6 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "cartoes_transacoes_copy1",
-							"type": "ExecutePipeline",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"pipeline": {
-									"referenceName": "pipeline_organizze_processos",
-									"type": "PipelineReference"
-								},
-								"waitOnCompletion": true,
-								"parameters": {
-									"url_relativa": {
-										"value": "@concat('credit_cards/',item().id_cartoes,'/invoices?start_date=2023-01-01&end_date=2024-12-31')",
-										"type": "Expression"
-									},
-									"schema": "1_RAW",
-									"tabela": "CARTOES_TRANSACOES"
-								}
-							}
-						},
-						{
 							"name": "pipeline_organizze_main",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
@@ -280,7 +259,19 @@
 									"referenceName": "pipeline_organizze_cartoes_transacoes",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"id_cartao": {
+										"value": "@item().id_cartao",
+										"type": "Expression"
+									},
+									"schema": "1_RAW",
+									"tabela": "CARTOES_TRANSACOES_DETALHADA",
+									"id_fatura": {
+										"value": "@item().id_fatura",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
