@@ -200,7 +200,14 @@
 			{
 				"name": "Lookup Cartoes Transacoes",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "ForEach Cartoes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -212,7 +219,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT DISTINCT \n    id as id_trasacao\n    ,credit_card_id as id_cartao\nFROM [1_RAW].CARTOES_TRANSACOES",
+						"sqlReaderQuery": "SELECT DISTINCT \n    id as id_fatura\n    ,credit_card_id as id_cartao\nFROM [1_RAW].CARTOES_TRANSACOES",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -237,7 +244,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Lookup Cartoes').output.value",
+						"value": "@activity('Lookup Cartoes Transacoes').output.value",
 						"type": "Expression"
 					},
 					"isSequential": false,
@@ -261,6 +268,19 @@
 									"schema": "1_RAW",
 									"tabela": "CARTOES_TRANSACOES"
 								}
+							}
+						},
+						{
+							"name": "pipeline_organizze_main",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pipeline_organizze_cartoes_transacoes",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
 							}
 						}
 					]
