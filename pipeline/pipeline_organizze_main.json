@@ -95,7 +95,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Script1",
+						"activity": "TRUNCATE CARTOES_TRANSACOES",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -165,7 +165,7 @@
 				}
 			},
 			{
-				"name": "Script1",
+				"name": "TRUNCATE CARTOES_TRANSACOES",
 				"type": "Script",
 				"dependsOn": [
 					{
