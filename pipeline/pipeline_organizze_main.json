@@ -231,7 +231,7 @@
 				}
 			},
 			{
-				"name": "ForEach Cartoes_copy1",
+				"name": "ForEach Cartoes_Faturas_Detalhadas",
 				"type": "ForEach",
 				"dependsOn": [
 					{
