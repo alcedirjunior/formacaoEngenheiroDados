@@ -272,7 +272,7 @@
 										"type": "Expression"
 									},
 									"schema": "1_RAW",
-									"tabela": "CARTOES_TRANSACOES_DETALHADA",
+									"tabela": "CARTOES_TRANSACOES_DETALHADAS",
 									"id_fatura": {
 										"value": "@item().id_fatura",
 										"type": "Expression"
