@@ -256,7 +256,7 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "pipeline_organizze_cartoes_transacoes",
+							"name": "pipeline_organizze_cartoes_faturas_detalhadas",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"userProperties": [],
