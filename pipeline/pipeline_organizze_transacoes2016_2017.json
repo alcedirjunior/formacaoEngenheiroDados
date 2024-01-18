@@ -981,8 +981,262 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_Organizze_Transacoes2022_2023",
+						"referenceName": "DS_Organizze_Transacoes_2022_2023",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_SqlServerOrganizzeTransacoes",
+						"type": "DatasetReference",
+						"parameters": {
+							"table": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							},
+							"schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "CopyDataOrganizzeTransformacoes2024",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyDataOrganizzeTransformacaoes2022-2023",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"preCopyScript": {
+							"value": "@{concat('IF OBJECT_ID(''',pipeline().parameters.schema, '.', pipeline().parameters.table,''')IS NOT NULL DROP TABLE ',pipeline().parameters.schema, '.', pipeline().parameters.table,'')}",
+							"type": "Expression"
+						},
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['description']"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['date']"
+								},
+								"sink": {
+									"name": "DATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['paid']"
+								},
+								"sink": {
+									"name": "PAID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['amount_cents']"
+								},
+								"sink": {
+									"name": "AMOUNT_CENTS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['total_installments']"
+								},
+								"sink": {
+									"name": "TOTAL_INSTALLMENTS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['installment']"
+								},
+								"sink": {
+									"name": "INSTALLMENT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['recurring']"
+								},
+								"sink": {
+									"name": "RECURRING",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['account_id']"
+								},
+								"sink": {
+									"name": "ACCOUNT_ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['category_id']"
+								},
+								"sink": {
+									"name": "CATEGORYA_ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['notes']"
+								},
+								"sink": {
+									"name": "NOTES",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['attachments_count']"
+								},
+								"sink": {
+									"name": "ATTACHMENTS_COUNT",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['credit_card_id']"
+								},
+								"sink": {
+									"name": "CREDIT_CARD_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "CREDIT_CARD_INVOICE_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['paid_credit_card_id']"
+								},
+								"sink": {
+									"name": "PAID_CREDIT_CARD_ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['paid_credit_card_invoice_id']"
+								},
+								"sink": {
+									"name": "PAID_CREDIT_CARD_INVOICE_ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['oposite_transaction_id']"
+								},
+								"sink": {
+									"name": "OPOSITE_TRANSACTION_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['oposite_account_id']"
+								},
+								"sink": {
+									"name": "OPOSITE_ACCOUNT_ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['created_at']"
+								},
+								"sink": {
+									"name": "CREATE_AT",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['updated_at']"
+								},
+								"sink": {
+									"name": "UPDATE_AT",
+									"type": "DateTime"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Organizze_Transacoes",
+						"type": "DatasetReference",
+						"parameters": {
+							"url_relative": "transactions?start_date=2024-01-01&end_date=2024-12-31"
+						}
 					}
 				],
 				"outputs": [

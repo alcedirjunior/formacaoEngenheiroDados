@@ -1,9 +1,14 @@
 {
-	"name": "DS_Organizze_Transacoes2022_2023",
+	"name": "DS_Organizze_Transacoes_2022_2023",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "RestServiceOrganizze",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"url_relativa": {
+				"type": "string"
+			}
 		},
 		"folder": {
 			"name": "Organizze"
@@ -11,7 +16,10 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "transactions?start_date=2022-01-01&end_date=2023-12-31"
+			"relativeUrl": {
+				"value": "@dataset().url_relativa",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}
