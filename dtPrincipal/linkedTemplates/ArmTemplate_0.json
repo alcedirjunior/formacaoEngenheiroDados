@@ -109,8 +109,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"jsonData": {
@@ -304,13 +303,52 @@
 					"referenceName": "RestServiceOrganizze",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"url_relativa": {
+						"type": "string"
+					}
+				},
 				"folder": {
 					"name": "Organizze"
 				},
 				"annotations": [],
 				"type": "RestResource",
 				"typeProperties": {
-					"relativeUrl": "categories/"
+					"relativeUrl": {
+						"value": "@dataset().url_relativa",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"url_relative": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().url_relative",
+						"type": "Expression"
+					}
 				},
 				"schema": []
 			},
@@ -365,7 +403,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2023')]",
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2021')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -379,7 +417,38 @@
 				"annotations": [],
 				"type": "RestResource",
 				"typeProperties": {
-					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2023-12-31"
+					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2021-12-31"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes_2022_2023')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"url_relativa": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().url_relativa",
+						"type": "Expression"
+					}
 				},
 				"schema": []
 			},
@@ -523,104 +592,6 @@
 						"type": "String"
 					},
 					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText1_Yan')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorageArquivoFinal",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Yan"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "Yan.csv",
-						"folderPath": "DestinMovies",
-						"fileSystem": "disco1"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": false,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageArquivoFinal')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorageArquivoFinal",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "Destino",
-						"fileSystem": "disco1"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "movie",
-						"type": "String"
-					},
-					{
-						"name": "title",
-						"type": "String"
-					},
-					{
-						"name": "genres",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "Rating",
-						"type": "String"
-					},
-					{
-						"name": "Rotton Tomato",
 						"type": "String"
 					}
 				]

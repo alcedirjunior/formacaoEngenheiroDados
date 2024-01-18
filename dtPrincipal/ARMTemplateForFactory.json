@@ -141,8 +141,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "FormacaoED"
@@ -212,8 +211,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Yan"
@@ -282,8 +280,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"jsonData": {
@@ -338,8 +335,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Yan"
@@ -388,8 +384,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "FormacaoED"
@@ -401,7 +396,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline_organizze')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline_organizze_cartoes_faturas_detalhadas')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -430,14 +425,7 @@
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": false,
-									"keys": [
-										"ID"
-									],
-									"interimSchemaName": ""
-								},
+								"writeBehavior": "insert",
 								"sqlWriterUseTableLock": false
 							},
 							"enableStaging": false,
@@ -446,42 +434,267 @@
 								"mappings": [
 									{
 										"source": {
+											"path": "[['id']"
+										},
+										"sink": {
+											"name": "transactions_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['description']"
+										},
+										"sink": {
+											"name": "transactions_description",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['date']"
+										},
+										"sink": {
+											"name": "transactions_date",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['paid']"
+										},
+										"sink": {
+											"name": "transactions_paid",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['amount_cents']"
+										},
+										"sink": {
+											"name": "transactions_amount",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['total_installments']"
+										},
+										"sink": {
+											"name": "transactions_total_installments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['installment']"
+										},
+										"sink": {
+											"name": "transactions_installment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['recurring']"
+										},
+										"sink": {
+											"name": "transactions_recurring",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['account_id']"
+										},
+										"sink": {
+											"name": "transactions_account_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['account_type']"
+										},
+										"sink": {
+											"name": "transactions_account_type",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['category_id']"
+										},
+										"sink": {
+											"name": "transactions_category_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['notes']"
+										},
+										"sink": {
+											"name": "transactions_notes",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['attachments_count']"
+										},
+										"sink": {
+											"name": "transactions_attachments_count",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['credit_card_id']"
+										},
+										"sink": {
+											"name": "transactions_credit_card_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['credit_card_invoice_id']"
+										},
+										"sink": {
+											"name": "transactions_credit_card_invoice_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['paid_credit_card_id']"
+										},
+										"sink": {
+											"name": "transactions_paid_credit_card_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['paid_credit_card_invoice_id']"
+										},
+										"sink": {
+											"name": "transactions_paid_credit_card_invoice_id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['created_at']"
+										},
+										"sink": {
+											"name": "transactions_created_at",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['updated_at']"
+										},
+										"sink": {
+											"name": "transactions_updated_at",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['tags']"
+										},
+										"sink": {
+											"name": "transactions_tags",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"path": "$['id']"
 										},
 										"sink": {
-											"name": "ID",
+											"name": "id",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "$['name']"
+											"path": "$['date']"
 										},
 										"sink": {
-											"name": "NAME",
+											"name": "date",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "$['color']"
+											"path": "$['starting_date']"
 										},
 										"sink": {
-											"name": "COLOR",
+											"name": "starting_date",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "$['parent_id']"
+											"path": "$['closing_date']"
 										},
 										"sink": {
-											"name": "PARENT_ID",
+											"name": "closing_date",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['amount_cents']"
+										},
+										"sink": {
+											"name": "amount_cents",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['payment_amount_cents']"
+										},
+										"sink": {
+											"name": "payment_amount_cents",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['balance_cents']"
+										},
+										"sink": {
+											"name": "balance_cents",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['previous_balance_cents']"
+										},
+										"sink": {
+											"name": "previous_balance_cents",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['credit_card_id']"
+										},
+										"sink": {
+											"name": "credit_card_id",
 											"type": "String"
 										}
 									}
 								],
-								"collectionReference": "",
+								"collectionReference": "$['transactions']",
 								"mapComplexValuesToString": true
 							}
 						},
@@ -489,30 +702,612 @@
 							{
 								"referenceName": "DS_Organizze",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"url_relativa": {
+										"value": "@concat('credit_cards/',pipeline().parameters.id_cartao,'/invoices/',pipeline().parameters.id_fatura)",
+										"type": "Expression"
+									}
+								}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DS_SqlServerOrganizzeCategoria",
+								"referenceName": "DS_SqlServerOrganizze",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									},
+									"tabela": {
+										"value": "@pipeline().parameters.tabela",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"id_cartao": {
+						"type": "string"
+					},
+					"schema": {
+						"type": "string",
+						"defaultValue": "dbo"
+					},
+					"tabela": {
+						"type": "string"
+					},
+					"id_fatura": {
+						"type": "string"
+					}
 				},
 				"folder": {
-					"name": "FormacaoED"
+					"name": "Organizze"
 				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_Organizze')]",
-				"[concat(variables('factoryId'), '/datasets/DS_SqlServerOrganizzeCategoria')]"
+				"[concat(variables('factoryId'), '/datasets/DS_SqlServerOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline_organizze_main')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "metas",
+						"type": "ExecutePipeline",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pipeline_organizze_processos",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"url_relativa": "budgets",
+								"schema": "1_RAW",
+								"tabela": "METAS",
+								"pre_copy": {
+									"value": "TRUNCATE TABLE [1_RAW].METAS",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					{
+						"name": "categorias",
+						"type": "ExecutePipeline",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [
+							{
+								"activity": "metas",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pipeline_organizze_processos",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"url_relativa": "categories",
+								"schema": "1_RAW",
+								"tabela": "CATEGORIAS",
+								"pre_copy": {
+									"value": "TRUNCATE TABLE [1_RAW].CATEGORIAS",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					{
+						"name": "Lookup Cartoes",
+						"type": "Lookup",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [
+							{
+								"activity": "cartoes",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT\nDISTINCT id as id_cartoes\nFROM [1_RAW].CARTOES\nWHERE ARCHIVED = 0",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_SqlServerOrganizze_Pesquisa",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Cartoes",
+						"type": "ForEach",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [
+							{
+								"activity": "TRUNCATE CARTOES_TRANSACOES",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup Cartoes').output.value",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "cartoes_transacoes",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "pipeline_organizze_processos",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"url_relativa": {
+												"value": "@concat('credit_cards/',item().id_cartoes,'/invoices?start_date=2023-01-01&end_date=2024-12-31')",
+												"type": "Expression"
+											},
+											"schema": "1_RAW",
+											"tabela": "CARTOES_TRANSACOES"
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "cartoes",
+						"type": "ExecutePipeline",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [
+							{
+								"activity": "categorias",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pipeline_organizze_processos",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"url_relativa": "credit_cards",
+								"schema": "1_RAW",
+								"tabela": "CARTOES",
+								"pre_copy": {
+									"value": "TRUNCATE TABLE [1_RAW].[CARTOES]",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					{
+						"name": "TRUNCATE CARTOES_TRANSACOES",
+						"type": "Script",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [
+							{
+								"activity": "Lookup Cartoes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"linkedServiceName": {
+							"referenceName": "SqlServerOrganizze",
+							"type": "LinkedServiceReference"
+						},
+						"typeProperties": {
+							"scripts": [
+								{
+									"type": "Query",
+									"text": "TRUNCATE TABLE [1_RAW].[CARTOES_TRANSACOES]"
+								}
+							],
+							"scriptBlockExecutionTimeout": "02:00:00"
+						}
+					},
+					{
+						"name": "Lookup Cartoes Transacoes",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "ForEach Cartoes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT DISTINCT \n    id as id_fatura\n    ,credit_card_id as id_cartao\nFROM [1_RAW].CARTOES_TRANSACOES",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "DS_SqlServerOrganizze_Pesquisa",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach Cartoes_Faturas_Detalhadas",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup Cartoes Transacoes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup Cartoes Transacoes').output.value",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "pipeline_organizze_cartoes_faturas_detalhadas",
+									"type": "ExecutePipeline",
+									"dependsOn": [
+										{
+											"activity": "TRUNCATE CARTOES_TRANSACOES_DETALHADAS_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "pipeline_organizze_cartoes_faturas_detalhadas",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"id_cartao": {
+												"value": "@item().id_cartao",
+												"type": "Expression"
+											},
+											"schema": "1_RAW",
+											"tabela": "CARTOES_TRANSACOES_DETALHADAS",
+											"id_fatura": {
+												"value": "@item().id_fatura",
+												"type": "Expression"
+											}
+										}
+									}
+								},
+								{
+									"name": "TRUNCATE CARTOES_TRANSACOES_DETALHADAS_copy1",
+									"type": "Script",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"linkedServiceName": {
+										"referenceName": "SqlServerOrganizze",
+										"type": "LinkedServiceReference"
+									},
+									"typeProperties": {
+										"scripts": [
+											{
+												"type": "Query",
+												"text": {
+													"value": "@concat('DELETE FROM [1_RAW].CARTOES_TRANSACOES_DETALHADAS WHERE ID = ', item().id_fatura, ' AND CREDIT_CARD_ID = ', item().id_cartao\n)",
+													"type": "Expression"
+												}
+											}
+										],
+										"scriptBlockExecutionTimeout": "02:00:00"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline_organizze_processos')]",
+				"[concat(variables('factoryId'), '/datasets/DS_SqlServerOrganizze_Pesquisa')]",
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerOrganizze')]",
+				"[concat(variables('factoryId'), '/pipelines/pipeline_organizze_cartoes_faturas_detalhadas')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline_organizze_processos')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyData",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"additionalColumns": [
+									{
+										"name": "data loading",
+										"value": {
+											"value": "@formatDateTime(convertTimeZone(utcNow(), 'UTC', 'E. South America Standard Time'), 'yyyy-MM-dd HH:mm:ss')\n",
+											"type": "Expression"
+										}
+									}
+								],
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"preCopyScript": {
+									"value": "@pipeline().parameters.pre_copy",
+									"type": "Expression"
+								},
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_Organizze",
+								"type": "DatasetReference",
+								"parameters": {
+									"url_relativa": {
+										"value": "@pipeline().parameters.url_relativa",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_SqlServerOrganizze",
+								"type": "DatasetReference",
+								"parameters": {
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									},
+									"tabela": {
+										"value": "@pipeline().parameters.tabela",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"url_relativa": {
+						"type": "string"
+					},
+					"schema": {
+						"type": "string",
+						"defaultValue": "dbo"
+					},
+					"tabela": {
+						"type": "string"
+					},
+					"pre_copy": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_Organizze')]",
+				"[concat(variables('factoryId'), '/datasets/DS_SqlServerOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline_organizze_processos_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyData",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"preCopyScript": {
+									"value": "@pipeline().parameters.pre_copy",
+									"type": "Expression"
+								},
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_Organizze",
+								"type": "DatasetReference",
+								"parameters": {
+									"url_relativa": {
+										"value": "@pipeline().parameters.url_relativa",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_SqlServerOrganizze",
+								"type": "DatasetReference",
+								"parameters": {
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									},
+									"tabela": {
+										"value": "@pipeline().parameters.tabela",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"url_relativa": {
+						"type": "string"
+					},
+					"schema": {
+						"type": "string",
+						"defaultValue": "dbo"
+					},
+					"tabela": {
+						"type": "string"
+					},
+					"pre_copy": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_Organizze')]",
+				"[concat(variables('factoryId'), '/datasets/DS_SqlServerOrganizze')]"
 			]
 		},
 		{
@@ -545,7 +1340,10 @@
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"preCopyScript": "IF OBJECT_ID('TRANSACOES_2')IS NOT NULL DROP TABLE TRANSACOES_2",
+								"preCopyScript": {
+									"value": "@{concat('IF OBJECT_ID(''',pipeline().parameters.schema, '.', pipeline().parameters.table,''')IS NOT NULL DROP TABLE ',pipeline().parameters.schema, '.', pipeline().parameters.table,'')}",
+									"type": "Expression"
+								},
 								"writeBehavior": "insert",
 								"sqlWriterUseTableLock": false,
 								"tableOption": "autoCreate"
@@ -750,7 +1548,16 @@
 							{
 								"referenceName": "DS_SqlServerOrganizzeTransacoes",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"table": {
+										"value": "@pipeline().parameters.table",
+										"type": "Expression"
+									},
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					},
@@ -994,12 +1801,21 @@
 							{
 								"referenceName": "DS_SqlServerOrganizzeTransacoes",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"table": {
+										"value": "@pipeline().parameters.table",
+										"type": "Expression"
+									},
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					},
 					{
-						"name": "CopyDataOrganizzeTransformacaoes2020-2023",
+						"name": "CopyDataOrganizzeTransformacaoes2020-2021",
 						"type": "Copy",
 						"dependsOn": [
 							{
@@ -1229,7 +2045,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DS_Organizze_Transacoes2020_2023",
+								"referenceName": "DS_Organizze_Transacoes2020_2021",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1238,17 +2054,540 @@
 							{
 								"referenceName": "DS_SqlServerOrganizzeTransacoes",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"table": {
+										"value": "@pipeline().parameters.table",
+										"type": "Expression"
+									},
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					},
+					{
+						"name": "CopyDataOrganizzeTransformacaoes2022-2023",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "CopyDataOrganizzeTransformacaoes2020-2021",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"ID"
+									]
+								},
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['id']"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['description']"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['date']"
+										},
+										"sink": {
+											"name": "DATE",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['paid']"
+										},
+										"sink": {
+											"name": "PAID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['amount_cents']"
+										},
+										"sink": {
+											"name": "AMOUNT_CENTS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['total_installments']"
+										},
+										"sink": {
+											"name": "TOTAL_INSTALLMENTS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['installment']"
+										},
+										"sink": {
+											"name": "INSTALLMENT",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['recurring']"
+										},
+										"sink": {
+											"name": "RECURRING",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['account_id']"
+										},
+										"sink": {
+											"name": "ACCOUNT_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['category_id']"
+										},
+										"sink": {
+											"name": "CATEGORYA_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['notes']"
+										},
+										"sink": {
+											"name": "NOTES",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['attachments_count']"
+										},
+										"sink": {
+											"name": "ATTACHMENTS_COUNT",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['credit_card_id']"
+										},
+										"sink": {
+											"name": "CREDIT_CARD_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['credit_card_invoice_id']"
+										},
+										"sink": {
+											"name": "CREDIT_CARD_INVOICE_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['paid_credit_card_id']"
+										},
+										"sink": {
+											"name": "PAID_CREDIT_CARD_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['paid_credit_card_invoice_id']"
+										},
+										"sink": {
+											"name": "PAID_CREDIT_CARD_INVOICE_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['oposite_transaction_id']"
+										},
+										"sink": {
+											"name": "OPOSITE_TRANSACTION_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['oposite_account_id']"
+										},
+										"sink": {
+											"name": "OPOSITE_ACCOUNT_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['created_at']"
+										},
+										"sink": {
+											"name": "CREATE_AT",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['updated_at']"
+										},
+										"sink": {
+											"name": "UPDATE_AT",
+											"type": "DateTime"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_Organizze_Transacoes_2022_2023",
+								"type": "DatasetReference",
+								"parameters": {
+									"url_relativa": "transactions?start_date=2022-01-01&end_date=2023-12-31"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_SqlServerOrganizzeTransacoes",
+								"type": "DatasetReference",
+								"parameters": {
+									"table": {
+										"value": "@pipeline().parameters.table",
+										"type": "Expression"
+									},
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					},
+					{
+						"name": "CopyDataOrganizzeTransformacoes2024",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "CopyDataOrganizzeTransformacaoes2022-2023",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['id']"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['description']"
+										},
+										"sink": {
+											"name": "DESCRIPTION",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['date']"
+										},
+										"sink": {
+											"name": "DATE",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['paid']"
+										},
+										"sink": {
+											"name": "PAID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['amount_cents']"
+										},
+										"sink": {
+											"name": "AMOUNT_CENTS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['total_installments']"
+										},
+										"sink": {
+											"name": "TOTAL_INSTALLMENTS",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['installment']"
+										},
+										"sink": {
+											"name": "INSTALLMENT",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['recurring']"
+										},
+										"sink": {
+											"name": "RECURRING",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['account_id']"
+										},
+										"sink": {
+											"name": "ACCOUNT_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['category_id']"
+										},
+										"sink": {
+											"name": "CATEGORYA_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['notes']"
+										},
+										"sink": {
+											"name": "NOTES",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['attachments_count']"
+										},
+										"sink": {
+											"name": "ATTACHMENTS_COUNT",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['credit_card_id']"
+										},
+										"sink": {
+											"name": "CREDIT_CARD_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['credit_card_invoice_id']"
+										},
+										"sink": {
+											"name": "CREDIT_CARD_INVOICE_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['paid_credit_card_id']"
+										},
+										"sink": {
+											"name": "PAID_CREDIT_CARD_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['paid_credit_card_invoice_id']"
+										},
+										"sink": {
+											"name": "PAID_CREDIT_CARD_INVOICE_ID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['oposite_transaction_id']"
+										},
+										"sink": {
+											"name": "OPOSITE_TRANSACTION_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['oposite_account_id']"
+										},
+										"sink": {
+											"name": "OPOSITE_ACCOUNT_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['created_at']"
+										},
+										"sink": {
+											"name": "CREATE_AT",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['updated_at']"
+										},
+										"sink": {
+											"name": "UPDATE_AT",
+											"type": "DateTime"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_Organizze_Transacoes",
+								"type": "DatasetReference",
+								"parameters": {
+									"url_relative": "transactions?start_date=2024-01-01&end_date=2024-12-31"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_SqlServerOrganizzeTransacoes",
+								"type": "DatasetReference",
+								"parameters": {
+									"table": {
+										"value": "@pipeline().parameters.table",
+										"type": "Expression"
+									},
+									"schema": {
+										"value": "@pipeline().parameters.schema",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"schema": {
+						"type": "string",
+						"defaultValue": "DBO"
+					},
+					"table": {
+						"type": "string",
+						"defaultValue": "TRANSACOES"
+					}
 				},
 				"folder": {
-					"name": "FormacaoED"
+					"name": "Organizze"
 				},
 				"annotations": []
 			},
@@ -1256,7 +2595,9 @@
 				"[concat(variables('factoryId'), '/datasets/DS_Organizze_Transacoes2016_2017')]",
 				"[concat(variables('factoryId'), '/datasets/DS_SqlServerOrganizzeTransacoes')]",
 				"[concat(variables('factoryId'), '/datasets/DS_Organizze_Transacoes2018_2019')]",
-				"[concat(variables('factoryId'), '/datasets/DS_Organizze_Transacoes2020_2023')]"
+				"[concat(variables('factoryId'), '/datasets/DS_Organizze_Transacoes2020_2021')]",
+				"[concat(variables('factoryId'), '/datasets/DS_Organizze_Transacoes_2022_2023')]",
+				"[concat(variables('factoryId'), '/datasets/DS_Organizze_Transacoes')]"
 			]
 		},
 		{
@@ -1323,13 +2664,52 @@
 					"referenceName": "RestServiceOrganizze",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"url_relativa": {
+						"type": "string"
+					}
+				},
 				"folder": {
 					"name": "Organizze"
 				},
 				"annotations": [],
 				"type": "RestResource",
 				"typeProperties": {
-					"relativeUrl": "categories/"
+					"relativeUrl": {
+						"value": "@dataset().url_relativa",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"url_relative": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().url_relative",
+						"type": "Expression"
+					}
 				},
 				"schema": []
 			},
@@ -1384,7 +2764,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2023')]",
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes2020_2021')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1398,7 +2778,7 @@
 				"annotations": [],
 				"type": "RestResource",
 				"typeProperties": {
-					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2023-12-31"
+					"relativeUrl": "transactions?start_date=2020-01-01&end_date=2021-12-31"
 				},
 				"schema": []
 			},
@@ -1407,13 +2787,53 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizzeCategoria')]",
+			"name": "[concat(parameters('factoryName'), '/DS_Organizze_Transacoes_2022_2023')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestServiceOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"url_relativa": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().url_relativa",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestServiceOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizze')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "SqlServerOrganizze",
 					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"schema": {
+						"type": "string",
+						"defaultValue": "dbo"
+					},
+					"tabela": {
+						"type": "string"
+					}
 				},
 				"folder": {
 					"name": "Organizze"
@@ -1439,8 +2859,14 @@
 					}
 				],
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "CATEGORIA_2"
+					"schema": {
+						"value": "@dataset().schema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().tabela",
+						"type": "Expression"
+					}
 				}
 			},
 			"dependsOn": [
@@ -1449,6 +2875,144 @@
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizzeTransacoes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"table": {
+						"type": "string",
+						"defaultValue": "TRASACOES"
+					},
+					"schema": {
+						"type": "string",
+						"defaultValue": "dbo"
+					}
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "DESCRIPTION",
+						"type": "varchar"
+					},
+					{
+						"name": "DATE",
+						"type": "date"
+					},
+					{
+						"name": "PAID",
+						"type": "varchar"
+					},
+					{
+						"name": "AMOUNT_CENTS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TOTAL_INSTALLMENTS",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "INSTALLMENT",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RECURRING",
+						"type": "varchar"
+					},
+					{
+						"name": "ACCOUNT_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CATEGORYA_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NOTES",
+						"type": "varchar"
+					},
+					{
+						"name": "ATTACHMENTS_COUNT",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CREDIT_CARD_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CREDIT_CARD_INVOICE_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PAID_CREDIT_CARD_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PAID_CREDIT_CARD_INVOICE_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OPOSITE_TRANSACTION_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "OPOSITE_ACCOUNT_ID",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CREATE_AT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPDATE_AT",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().schema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizzeTransacoes3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1562,8 +3126,46 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "TRANSACOES_2"
+					"table": "TRANSACOES_3"
 				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServerOrganizze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SqlServerOrganizze_Pesquisa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerOrganizze",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Organizze"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "varchar"
+					},
+					{
+						"name": "NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "COLOR",
+						"type": "varchar"
+					},
+					{
+						"name": "PARENT_ID",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/SqlServerOrganizze')]"
@@ -2061,7 +3663,9 @@
 						"     limit: 1000,",
 						"     httpMethod: 'GET',",
 						"     timeout: 30,",
-						"     requestInterval: 0) ~> source1",
+						"     requestInterval: 0,",
+						"     paginationRules: ['supportRFC5988' -> 'true'],",
+						"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> source1",
 						"source1 derive(body = toString(byName('body')),",
 						"          headers = toString(byName('headers'))) ~> MapDrifted1",
 						"MapDrifted1 sink(allowSchemaDrift: true,",
