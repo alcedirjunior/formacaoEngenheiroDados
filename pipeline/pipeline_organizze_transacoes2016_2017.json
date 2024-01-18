@@ -982,7 +982,10 @@
 				"inputs": [
 					{
 						"referenceName": "DS_Organizze_Transacoes_2022_2023",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"url_relativa": "transactions?start_date=2022-01-01&end_date=2023-12-31"
+						}
 					}
 				],
 				"outputs": [
