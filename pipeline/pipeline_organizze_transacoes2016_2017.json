@@ -1033,10 +1033,6 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"preCopyScript": {
-							"value": "@{concat('IF OBJECT_ID(''',pipeline().parameters.schema, '.', pipeline().parameters.table,''')IS NOT NULL DROP TABLE ',pipeline().parameters.schema, '.', pipeline().parameters.table,'')}",
-							"type": "Expression"
-						},
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate"
