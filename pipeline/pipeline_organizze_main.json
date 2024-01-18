@@ -225,7 +225,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT DISTINCT \n    id as id_fatura\n    ,credit_card_id as id_cartao\nFROM [1_RAW].CARTOES_TRANSACOES",
+						"sqlReaderQuery": "SELECT DISTINCT \n    id as id_fatura\n    ,credit_card_id as id_cartao\nFROM [1_RAW].CARTOES_TRANSACOES\nWHERE YEAR(DATE) = 2024",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
