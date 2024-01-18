@@ -14,7 +14,7 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"url_relativa": "budgets",
+						"url_relativa": "budgets/2024",
 						"schema": "1_RAW",
 						"tabela": "METAS",
 						"pre_copy": {
@@ -27,6 +27,8 @@
 			{
 				"name": "categorias",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "metas",
@@ -202,6 +204,8 @@
 			{
 				"name": "Lookup Cartoes Transacoes",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ForEach Cartoes",
@@ -235,6 +239,8 @@
 			{
 				"name": "ForEach Cartoes_Faturas_Detalhadas",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup Cartoes Transacoes",
