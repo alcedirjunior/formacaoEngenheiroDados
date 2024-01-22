@@ -58,8 +58,6 @@
 			{
 				"name": "Lookup Cartoes",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "cartoes",
