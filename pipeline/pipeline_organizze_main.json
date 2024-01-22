@@ -93,8 +93,6 @@
 			{
 				"name": "ForEach Cartoes",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "TRUNCATE CARTOES_TRANSACOES",
@@ -169,8 +167,6 @@
 			{
 				"name": "TRUNCATE CARTOES_TRANSACOES",
 				"type": "Script",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup Cartoes",
@@ -204,8 +200,6 @@
 			{
 				"name": "Lookup Cartoes Transacoes",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ForEach Cartoes",
@@ -239,8 +233,6 @@
 			{
 				"name": "ForEach Cartoes_Faturas_Detalhadas",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup Cartoes Transacoes",
