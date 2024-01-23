@@ -774,7 +774,7 @@
 							},
 							"waitOnCompletion": true,
 							"parameters": {
-								"url_relativa": "budgets",
+								"url_relativa": "budgets/2024",
 								"schema": "1_RAW",
 								"tabela": "METAS",
 								"pre_copy": {
@@ -816,8 +816,6 @@
 					{
 						"name": "Lookup Cartoes",
 						"type": "Lookup",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "cartoes",
@@ -852,8 +850,6 @@
 					{
 						"name": "ForEach Cartoes",
 						"type": "ForEach",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "TRUNCATE CARTOES_TRANSACOES",
@@ -897,8 +893,6 @@
 					{
 						"name": "cartoes",
 						"type": "ExecutePipeline",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "categorias",
@@ -928,8 +922,6 @@
 					{
 						"name": "TRUNCATE CARTOES_TRANSACOES",
 						"type": "Script",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "Lookup Cartoes",
