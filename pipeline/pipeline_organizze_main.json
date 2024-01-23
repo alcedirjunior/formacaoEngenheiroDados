@@ -5,8 +5,6 @@
 			{
 				"name": "metas",
 				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -58,8 +56,6 @@
 			{
 				"name": "Lookup Cartoes",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "cartoes",
@@ -93,8 +89,6 @@
 			{
 				"name": "ForEach Cartoes",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "TRUNCATE CARTOES_TRANSACOES",
@@ -138,8 +132,6 @@
 			{
 				"name": "cartoes",
 				"type": "ExecutePipeline",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "categorias",
@@ -169,8 +161,6 @@
 			{
 				"name": "TRUNCATE CARTOES_TRANSACOES",
 				"type": "Script",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup Cartoes",
@@ -204,8 +194,6 @@
 			{
 				"name": "Lookup Cartoes Transacoes",
 				"type": "Lookup",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ForEach Cartoes",
@@ -239,8 +227,6 @@
 			{
 				"name": "ForEach Cartoes_Faturas_Detalhadas",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup Cartoes Transacoes",
